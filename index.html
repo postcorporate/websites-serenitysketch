@@ -2,18 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script>
-    (function () {
-      var b = document.createElement('base');
-      if (/\.github\.io$/i.test(location.hostname)) {
-        var parts = location.pathname.split('/').filter(Boolean);
-        b.href = parts.length ? '/' + parts[0] + '/' : '/';
-      } else {
-        b.href = './';
-      }
-      document.head.insertBefore(b, document.head.firstChild);
-    })();
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Serenity Sketch - a guided mindfulness sandbox for iPad. Paint with water, watch it evaporate, find stillness in letting go.">
   <meta property="og:title" content="Serenity Sketch - Press Kit">
@@ -33,7 +21,7 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="#top">
-        <span class="brand-mark">◐</span>
+        <span class="brand-mark"><img src="assets/images/sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
         <span class="brand-name">Serenity Sketch</span>
       </a>
       <nav aria-label="Primary">
@@ -53,26 +41,29 @@
   <main id="main">
 
     <section id="top" class="hero" aria-label="Hero">
-      <picture class="hero-art">
-        <source media="(min-width: 1024px)" srcset="assets/images/hero1-1200x670.webp">
-        <source media="(min-width: 640px)" srcset="assets/images/hero1-800x450.webp">
-        <img src="assets/images/hero1-600x338.webp" alt="Water painting on stone, mid-evaporation, in a serene natural setting" loading="eager" fetchpriority="high">
-      </picture>
+      <video class="hero-art" id="hero-video"
+        autoplay muted loop playsinline
+        preload="auto"
+        poster="assets/images/presskit_heroVid_still-1920x1080.webp">
+        <source src="assets/vids/presskit_heroVid_loop_compressed.mp4" type="video/mp4">
+        <img src="assets/images/presskit_heroVid_still-1920x1080.webp"
+             alt="Water painting on stone, mid-evaporation, in a serene natural setting">
+      </video>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="container hero-copy">
         <p class="eyebrow">Press Kit · Summer 2026</p>
         <h1 class="hero-logo">
           <img
-            src="assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x330.png"
-            srcset="assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-small-320x165.png 320w,
-                    assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x330.png 640w,
-                    assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-large-1280x661.png 1280w"
+            src="assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.png"
+            srcset="assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-small-320x151.webp 320w,
+                    assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp 640w,
+                    assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-large-1280x605.webp 1280w"
             sizes="(max-width: 600px) 240px, 400px"
             alt="Serenity Sketch"
-            width="640" height="330"
+            width="640" height="302"
             loading="eager" fetchpriority="high">
         </h1>
-        <p class="platform-pill"><span aria-hidden="true">◐</span> Designed for iPad</p>
+        <p class="platform-pill"><img class="pill-icon" src="assets/images/sigils/sigil-path-of-initiation-black.png" alt="" width="16" height="16" aria-hidden="true"> Designed for iPad</p>
         <p class="tagline">The self-care app that plays like a game.</p>
         <p class="lead">
           Relax and paint with water in a guided mindfulness sandbox. Create ephemeral art, follow a gentle Guide through atmospheric landscapes, and find stillness in letting go.
@@ -89,10 +80,10 @@
         <h2 id="factsheet-heading" class="section-eyebrow">Factsheet</h2>
         <dl class="factsheet-grid">
           <div><dt>Developer</dt><dd><a href="https://coppercoin.nl" target="_blank" rel="noreferrer">Copper Coin</a></dd></div>
-          <div><dt>Platform</dt><dd>Designed for iPad <span class="price-note">(Apple Pencil or Touch)</span></dd></div>
+          <div><dt>Studio Home</dt><dd>Netherlands</dd></div>
+          <div><dt>Platform</dt><dd>iPad <span class="price-note">(Apple Pencil or Touch)</span></dd></div>
           <div><dt>Launch</dt><dd>Summer 2026</dd></div>
           <div><dt>Price</dt><dd>€4.99 at launch <span class="price-note">(early-supporter rate)</span></dd></div>
-          <div><dt>Studio Home</dt><dd>Netherlands</dd></div>
           <div><dt>Website</dt><dd class="factsheet-links"><a href="https://serenitysketch.com" target="_blank" rel="noreferrer">serenitysketch.com</a></dd></div>
           <div><dt>Press contact</dt><dd><a href="mailto:josh@coppercoin.nl">josh@coppercoin.nl</a></dd></div>
         </dl>
@@ -103,10 +94,13 @@
       <div class="container">
         <p class="section-eyebrow">Watch</p>
         <figure class="trailer-figure">
-          <video class="trailer-video" controls preload="none" playsinline poster="assets/images/hero1-1200x670.webp">
-            <source src="assets/vids/Teaser_long.mp4" type="video/mp4">
-            Your browser does not support video. <a href="assets/vids/Teaser_long.mp4">Download the trailer (.mp4)</a>.
-          </video>
+          <iframe class="trailer-video"
+            src="https://www.youtube-nocookie.com/embed/b32JXo8g6tw?rel=0&modestbranding=1"
+            title="Serenity Sketch — Teaser Trailer"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"></iframe>
         </figure>
       </div>
     </section>
@@ -424,8 +418,8 @@
               <img
                 class="studio-mark"
                 src="assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-256.png"
-                srcset="assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-256.png 1x,
-                        assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-512.png 2x"
+                srcset="assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-256.webp 1x,
+                        assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-512.webp 2x"
                 alt=""
                 width="88"
                 height="88"
@@ -518,6 +512,7 @@
     }
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const heroVideo = document.getElementById('hero-video');
     const updateMotionPreference = prefersReduced => {
       lazyVideos.forEach(video => {
         if (prefersReduced) {
@@ -531,6 +526,14 @@
           playPromise.catch(() => {});
         }
       });
+      if (heroVideo) {
+        if (prefersReduced) {
+          heroVideo.pause();
+        } else {
+          const p = heroVideo.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+        }
+      }
     };
     updateMotionPreference(reducedMotion.matches);
     reducedMotion.addEventListener('change', e => updateMotionPreference(e.matches));

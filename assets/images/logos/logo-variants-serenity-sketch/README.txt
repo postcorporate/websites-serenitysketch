@@ -1,24 +1,27 @@
-Serenity Sketch wordmark - PNG variants
-========================================
+Serenity Sketch wordmark - PNG / WebP variants
+================================================
 
 Generated from logo-serenity-sketch-grey.svg (Inkscape vector source).
-The SVG itself ships with the press kit zip alongside the PNGs.
+The SVG itself ships with the press kit zip alongside the rasters.
 
 Variants
 --------
 - grey_transparent/   off-white mark (#F9F9F9) on transparent background  - matches SVG, intended for dark surfaces
 - black_transparent/  black mark on transparent background                 - intended for light surfaces
 
-Sizes (RGBA, transparent bg, aspect ratio ~1.937:1 from SVG viewBox 132.33x68.33)
---------------------------------------------------------------------------------
-- small  : 320 x 165 px
-- medium : 640 x 330 px
-- large  : 1280 x 661 px
+Sizes (RGBA, transparent bg, aspect ratio ~2.12:1 after trimming)
+-----------------------------------------------------------------
+- small  : 320 x 151 px
+- medium : 640 x 302 px
+- large  : 1280 x 604 px
+
+Each size is generated as both .png and .webp.
 
 Filename pattern
 ----------------
-logo-<variant>-<small|medium|large>-<W>x<H>.png
-  e.g. logo-grey_transparent-medium-640x330.png
+logo-<variant>-<small|medium|large>-<W>x<H>.<png|webp>
+  e.g. logo-grey_transparent-medium-640x302.png
+       logo-grey_transparent-medium-640x302.webp
 
 Regeneration
 ------------
@@ -28,9 +31,9 @@ From the repo root:
 Or rebuild every logo set in one go:
   python serenity-sketch-presskit/scripts/generate-logo-variants.py
 
-The script requires Inkscape on PATH (or pass --inkscape <full path>).
-Heights are computed by Inkscape from the SVG's viewBox so AR is always
-preserved; final WxH dimensions are baked into the filename.
+The script uses cairosvg (preferred) or Inkscape on PATH (or pass
+--inkscape <full path>). Transparent padding is automatically trimmed
+before final resize so the logo fills its bounding box tightly.
 
 Source of truth
 ---------------
