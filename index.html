@@ -81,7 +81,7 @@
         <dl class="factsheet-grid">
           <div><dt>Developer</dt><dd><a href="https://coppercoin.nl" target="_blank" rel="noreferrer">Copper Coin</a></dd></div>
           <div><dt>Studio Home</dt><dd>Netherlands</dd></div>
-          <div><dt>Platform</dt><dd>iPad <span class="price-note">(Apple Pencil or Touch)</span></dd></div>
+          <div><dt>Platform</dt><dd>iPad <span class="price-note">(Apple Pencil and Touch)</span></dd></div>
           <div><dt>Launch</dt><dd>Summer 2026</dd></div>
           <div><dt>Price</dt><dd>€4.99 at launch <span class="price-note">(early-supporter rate)</span></dd></div>
           <div><dt>Website</dt><dd class="factsheet-links"><a href="https://serenitysketch.com" target="_blank" rel="noreferrer">serenitysketch.com</a></dd></div>
@@ -171,9 +171,9 @@
 
           <figure class="map-figure">
             <picture>
-              <source media="(min-width: 1024px)" srcset="assets/images/GameMap-1200x675.webp">
-              <source media="(min-width: 640px)" srcset="assets/images/GameMap-800x450.webp">
-              <img src="assets/images/GameMap-600x338.webp" alt="The Journey of Letting Go map: Path of Initiation branching into five themed Paths" loading="lazy">
+              <source media="(min-width: 1024px)" srcset="assets/images/GameMap16-9-1200x675.webp">
+              <source media="(min-width: 640px)" srcset="assets/images/GameMap16-9-800x450.webp">
+              <img src="assets/images/GameMap16-9-600x338.webp" alt="The Journey of Letting Go map: Path of Initiation branching into five themed Paths" loading="lazy">
             </picture>
             <figcaption>The Journey map. Five Paths unfold from the Path of Initiation.</figcaption>
           </figure>
@@ -211,39 +211,59 @@
             <h3 class="pillar-title">Inviting landscapes, distinct moods.</h3>
             <p>From warm coastlines to ancient forests, each setting carries a different emotional temperature.</p>
           </div>
-          <div class="settings-grid">
-            <figure>
-              <picture>
-                <source media="(min-width: 1024px)" srcset="assets/images/Painting_Initiation-1200x675.webp">
-                <source media="(min-width: 640px)" srcset="assets/images/Painting_Initiation-800x450.webp">
-                <img src="assets/images/Painting_Initiation-600x338.webp" alt="A warm shoreline environment" loading="lazy">
-              </picture>
-              <figcaption>A warm shoreline</figcaption>
-            </figure>
-            <figure>
-              <picture>
-                <source media="(min-width: 1024px)" srcset="assets/images/Painting_Lineage-1200x675.webp">
-                <source media="(min-width: 640px)" srcset="assets/images/Painting_Lineage-800x450.webp">
-                <img src="assets/images/Painting_Lineage-600x338.webp" alt="An ancient forest environment" loading="lazy">
-              </picture>
-              <figcaption>An ancient forest</figcaption>
-            </figure>
-            <figure>
-              <picture>
-                <source media="(min-width: 1024px)" srcset="assets/images/Painting_Resonance-1200x675.webp">
-                <source media="(min-width: 640px)" srcset="assets/images/Painting_Resonance-800x450.webp">
-                <img src="assets/images/Painting_Resonance-600x338.webp" alt="A balmy sandbar environment" loading="lazy">
-              </picture>
-              <figcaption>A balmy sandbar</figcaption>
-            </figure>
-            <figure>
-              <picture>
-                <source media="(min-width: 1024px)" srcset="assets/images/Painting_Imperfection-1200x675.webp">
-                <source media="(min-width: 640px)" srcset="assets/images/Painting_Imperfection-800x450.webp">
-                <img src="assets/images/Painting_Imperfection-600x338.webp" alt="Mysterious cliffs in the distance" loading="lazy">
-              </picture>
-              <figcaption>Mysterious cliffs</figcaption>
-            </figure>
+          <div class="settings-carousel" data-carousel tabindex="0" aria-roledescription="carousel" aria-label="Natural settings">
+            <div class="settings-carousel__viewport">
+              <div class="settings-carousel__track">
+                <figure class="settings-carousel__slide">
+                  <picture>
+                    <source media="(min-width: 1024px)" srcset="assets/images/Painting_Initiation-1200x675.webp">
+                    <source media="(min-width: 640px)" srcset="assets/images/Painting_Initiation-800x450.webp">
+                    <img src="assets/images/Painting_Initiation-600x338.webp" alt="A warm shoreline environment" loading="lazy">
+                  </picture>
+                  <figcaption>A warm shoreline</figcaption>
+                </figure>
+                <figure class="settings-carousel__slide">
+                  <picture>
+                    <source media="(min-width: 1024px)" srcset="assets/images/Painting_Lineage-1200x675.webp">
+                    <source media="(min-width: 640px)" srcset="assets/images/Painting_Lineage-800x450.webp">
+                    <img src="assets/images/Painting_Lineage-600x338.webp" alt="An ancient forest environment" loading="lazy">
+                  </picture>
+                  <figcaption>An ancient forest</figcaption>
+                </figure>
+                <figure class="settings-carousel__slide">
+                  <picture>
+                    <source media="(min-width: 1024px)" srcset="assets/images/Painting_Resonance-1200x675.webp">
+                    <source media="(min-width: 640px)" srcset="assets/images/Painting_Resonance-800x450.webp">
+                    <img src="assets/images/Painting_Resonance-600x338.webp" alt="A balmy sandbar environment" loading="lazy">
+                  </picture>
+                  <figcaption>A balmy sandbar</figcaption>
+                </figure>
+                <figure class="settings-carousel__slide">
+                  <picture>
+                    <source media="(min-width: 1024px)" srcset="assets/images/Painting_Imperfection-1200x675.webp">
+                    <source media="(min-width: 640px)" srcset="assets/images/Painting_Imperfection-800x450.webp">
+                    <img src="assets/images/Painting_Imperfection-600x338.webp" alt="Mysterious cliffs in the distance" loading="lazy">
+                  </picture>
+                  <figcaption>Mysterious cliffs</figcaption>
+                </figure>
+              </div>
+              <div class="settings-carousel__overlay">
+                <button type="button" class="settings-carousel__btn settings-carousel__btn--overlay settings-carousel__btn--prev" data-carousel-prev aria-label="Previous setting">
+                  <span aria-hidden="true">←</span>
+                </button>
+                <button type="button" class="settings-carousel__btn settings-carousel__btn--overlay settings-carousel__btn--next" data-carousel-next aria-label="Next setting">
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+            <div class="settings-carousel__controls" aria-label="Carousel controls">
+              <div class="settings-carousel__dots" role="tablist" aria-label="Choose a setting">
+                <button type="button" class="settings-carousel__dot" role="tab" data-carousel-goto="0" aria-label="A warm shoreline" aria-selected="true"></button>
+                <button type="button" class="settings-carousel__dot" role="tab" data-carousel-goto="1" aria-label="An ancient forest" aria-selected="false"></button>
+                <button type="button" class="settings-carousel__dot" role="tab" data-carousel-goto="2" aria-label="A balmy sandbar" aria-selected="false"></button>
+                <button type="button" class="settings-carousel__dot" role="tab" data-carousel-goto="3" aria-label="Mysterious cliffs" aria-selected="false"></button>
+              </div>
+            </div>
           </div>
         </div>
       </article>
@@ -537,6 +557,45 @@
     };
     updateMotionPreference(reducedMotion.matches);
     reducedMotion.addEventListener('change', e => updateMotionPreference(e.matches));
+
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+      const track = carousel.querySelector('.settings-carousel__track');
+      const slides = Array.from(carousel.querySelectorAll('.settings-carousel__slide'));
+      const prevBtns = Array.from(carousel.querySelectorAll('[data-carousel-prev]'));
+      const nextBtns = Array.from(carousel.querySelectorAll('[data-carousel-next]'));
+      const dots = Array.from(carousel.querySelectorAll('[data-carousel-goto]'));
+      if (!track || slides.length < 2) return;
+
+      let index = 0;
+
+      const goTo = nextIndex => {
+        index = (nextIndex + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, i) => {
+          const active = i === index;
+          dot.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        slides.forEach((slide, i) => {
+          slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        });
+      };
+
+      prevBtns.forEach(btn => btn.addEventListener('click', () => goTo(index - 1)));
+      nextBtns.forEach(btn => btn.addEventListener('click', () => goTo(index + 1)));
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const target = Number(dot.getAttribute('data-carousel-goto'));
+          if (!Number.isNaN(target)) goTo(target);
+        });
+      });
+
+      carousel.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(index - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1); }
+      });
+
+      goTo(0);
+    });
   </script>
 </body>
 </html>

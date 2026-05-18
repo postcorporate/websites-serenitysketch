@@ -27,12 +27,7 @@ jobs:
           lfs: true
 
       - name: Assemble site
-        run: |
-          mkdir -p site
-          cp index.html site/
-          cp -r assets styles site/
-          if [ -f CNAME ]; then cp CNAME site/; fi
-          touch site/.nojekyll
+        run: bash scripts/assemble-site.sh site
 
       - uses: actions/configure-pages@v4
 
