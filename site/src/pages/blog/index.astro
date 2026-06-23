@@ -1,0 +1,261 @@
+---
+import { getCollection } from 'astro:content';
+import game from '../../../../shared/game.json';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Thoughts on mindfulness, creativity, and making Serenity Sketch.">
+  <meta property="og:title" content={`Blog — ${game.name}`}>
+  <meta property="og:description" content="Thoughts on mindfulness, creativity, and making Serenity Sketch.">
+  <meta property="og:image" content={`https://serenitysketch.com/assets/images/hero1-1200x670.webp`}>
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="/assets/images/path-sigils/sigil-path-of-initiation-black.png">
+  <title>Blog — {game.name}</title>
+  <link rel="preload" href="/assets/fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles/fonts.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <style is:global>
+    :root {
+      --color-bg:         var(--paper);
+      --color-text:       var(--ink);
+      --color-text-muted: var(--ink-soft);
+      --color-accent:     var(--copper);
+      --color-accent-dark:var(--copper-deep);
+      --color-border:     var(--rule);
+    }
+    html { scroll-behavior: smooth; }
+    /* Blog pages have no hero video — header is always opaque */
+    .site-header {
+      background: rgba(246, 239, 227, 0.95) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--rule) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/">
+        <span class="brand-mark"><img src="/assets/images/path-sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
+        <span class="brand-name">{game.name}</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#signup">Sign up</a></li>
+          <li><a href="/blog" aria-current="page">Blog</a></li>
+          <li><a href="/presskit">Press kit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="blog-index-header">
+      <div class="container">
+        <p class="section-eyebrow">Blog</p>
+        <h1 class="display">From the studio</h1>
+        <p class="blog-index-lead">Thoughts on mindfulness, creativity, and making Serenity Sketch.</p>
+      </div>
+    </section>
+
+    <section class="blog-index-list">
+      <div class="container">
+        {posts.length === 0 ? (
+          <p class="blog-empty">No posts yet. Check back soon.</p>
+        ) : (
+          <ul class="post-list">
+            {posts.map((post) => (
+              <li class="post-card">
+                <a href={`/blog/${post.slug}`} class="post-card__link">
+                  {post.data.heroImage && (
+                    <div class="post-card__image-wrap">
+                      <img
+                        src={post.data.heroImage}
+                        alt=""
+                        class="post-card__image"
+                        loading="lazy"
+                        width="800" height="450"
+                      />
+                    </div>
+                  )}
+                  <div class="post-card__body">
+                    {post.data.category && (
+                      <p class="post-card__category">{post.data.category}</p>
+                    )}
+                    <h2 class="post-card__title">{post.data.title}</h2>
+                    <p class="post-card__desc">{post.data.description}</p>
+                    <p class="post-card__meta">
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {formatDate(post.data.pubDate)}
+                      </time>
+                    </p>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wrap">
+        <p class="footer-brand">© 2026 <a href={game.studioUrl}>{game.developer}</a> · {game.name}</p>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="/blog">Blog</a>
+          <a href="/presskit">Press kit</a>
+          <a href={`mailto:${game.pressContact}`}>{game.pressContact}</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    .blog-index-header {
+      padding: clamp(3rem, 6vw, 5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .blog-index-lead {
+      color: var(--ink-soft);
+      font-size: 1.0625rem;
+      margin-top: 0.75rem;
+      max-width: 520px;
+    }
+
+    .blog-index-list {
+      padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(3rem, 6vw, 5rem);
+    }
+
+    .blog-empty {
+      color: var(--ink-soft);
+      font-size: 1rem;
+    }
+
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .post-card {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .post-card:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .post-card__link {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding: 1.75rem 0;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    @media (min-width: 640px) {
+      .post-card__link {
+        grid-template-columns: 220px 1fr;
+        align-items: start;
+      }
+    }
+
+    .post-card__image-wrap {
+      border-radius: var(--radius, 8px);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+    }
+
+    .post-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .post-card__link:hover .post-card__image {
+      transform: scale(1.02);
+    }
+
+    .post-card__body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .post-card__category {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--copper, #b26a43);
+      margin: 0;
+    }
+
+    .post-card__title {
+      font-family: var(--serif);
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .post-card__link:hover .post-card__title {
+      color: var(--copper-deep, var(--copper));
+    }
+
+    .post-card__desc {
+      color: var(--ink-soft);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      margin: 0.25rem 0 0;
+    }
+
+    .post-card__meta {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      margin: 0.5rem 0 0;
+      opacity: 0.7;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.65;
+      font-size: 0.875rem;
+    }
+    .footer-links a:hover { opacity: 1; }
+  </style>
+
+</body>
+</html>

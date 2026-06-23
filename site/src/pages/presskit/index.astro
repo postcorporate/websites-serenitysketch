@@ -1,0 +1,510 @@
+---
+import Press from '../../layouts/Press.astro';
+import game from '../../../../shared/game.json';
+---
+
+<Press>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top">
+        <span class="brand-mark"><img src="/assets/images/path-sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
+        <span class="brand-name">{game.name}</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#trailer">Trailer</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#quotes">Reactions</a></li>
+          <li><a href="#creators">For Creators</a></li>
+          <li><a href="#downloads">Assets</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section id="top" class="hero" aria-label="Hero">
+      <video class="hero-art" id="hero-video"
+        autoplay muted loop playsinline
+        preload="metadata"
+        poster="/assets/images/presskit_heroVid_still-800x450.webp">
+        <source src="/assets/vids/presskit_heroVid_loop_compressed.mp4" type="video/mp4">
+        <img src="/assets/images/presskit_heroVid_still-800x450.webp"
+             srcset="/assets/images/presskit_heroVid_still-600x338.webp 600w,
+                     /assets/images/presskit_heroVid_still-800x450.webp 800w,
+                     /assets/images/presskit_heroVid_still-1200x675.webp 1200w,
+                     /assets/images/presskit_heroVid_still-1920x1080.webp 1920w"
+             sizes="100vw"
+             alt="Water painting on stone, mid-evaporation, in a serene natural setting">
+      </video>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="container hero-copy">
+        <p class="eyebrow">Press Kit · {game.launch}</p>
+        <h1 class="hero-logo">
+          <img
+            src="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp"
+            srcset="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-small-320x151.webp 320w,
+                    /assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp 640w,
+                    /assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-large-1280x605.webp 1280w"
+            sizes="(max-width: 600px) 240px, 400px"
+            alt={game.name}
+            width="640" height="302"
+            loading="eager" fetchpriority="high">
+        </h1>
+        <p class="tagline">{game.tagline}</p>
+        <ul class="hero-chips">
+          <li class="hero-chip">
+            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/brush-small-thick.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+            <span>Paint<br>with water</span>
+          </li>
+          <li class="hero-chip">
+            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-sanctuary-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+            <span>Follow<br>a gentle guide</span>
+          </li>
+          <li class="hero-chip">
+            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-initiation-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+            <span>Find rest<br>in Letting Go</span>
+          </li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#downloads">Press kit assets</a>
+          <a class="btn btn-ghost" href="#contact">Request a key</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="factsheet" class="factsheet" aria-labelledby="factsheet-heading">
+      <div class="container">
+        <h2 id="factsheet-heading" class="section-eyebrow">Factsheet</h2>
+        <dl class="factsheet-grid">
+          <div><dt>Developer</dt><dd><a href={game.studioUrl} target="_blank" rel="noreferrer">{game.developer}</a></dd></div>
+          <div><dt>Studio Home</dt><dd>{game.studioLocation}</dd></div>
+          <div><dt>Platform</dt><dd>{game.platform} <span class="price-note">({game.platformNote})</span></dd></div>
+          <div><dt>Launch</dt><dd>{game.launch}</dd></div>
+          <div><dt>Price</dt><dd>{game.price}</dd></div>
+          <div><dt>Website</dt><dd class="factsheet-links"><a href={game.website} target="_blank" rel="noreferrer">serenitysketch.com</a></dd></div>
+          <div><dt>Press contact</dt><dd><a href={`mailto:${game.pressContact}`}>{game.pressContact}</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="trailer" class="section section-trailer" aria-label="Trailer">
+      <div class="container">
+        <figure class="trailer-figure">
+          <div class="trailer-facade" tabindex="0" data-youtube-id={game.trailerYoutubeId} data-youtube-title={game.trailerYoutubeTitle}>
+            <img class="trailer-facade__thumb"
+              src={`https://i.ytimg.com/vi/${game.trailerYoutubeId}/maxresdefault.jpg`}
+              srcset={`https://i.ytimg.com/vi/${game.trailerYoutubeId}/hqdefault.jpg 480w, https://i.ytimg.com/vi/${game.trailerYoutubeId}/sddefault.jpg 640w, https://i.ytimg.com/vi/${game.trailerYoutubeId}/maxresdefault.jpg 1280w`}
+              sizes="(min-width: 760px) 1080px, 100vw"
+              alt=""
+              width="1280" height="720"
+              loading="lazy" decoding="async">
+            <button type="button" class="trailer-facade__play" aria-label={`Play ${game.trailerYoutubeTitle}`}></button>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section id="about" class="section section-about">
+      <div class="container about-layout">
+        <div class="about-content">
+          <p class="section-eyebrow">About the game</p>
+          <h2 class="display">Paint water upon stone. Breathe. Let go.</h2>
+          <div class="prose">
+            <p class="lede"><strong>A self-care ritual where each evaporating brushstroke brings freedom and reflection. Inspired by the Zen Practice of water painting, you trace water on stone, watch it disappear, and release the need for permanence.</strong></p>
+            <p>
+              Most self-care apps are serious and <em>in your head</em>. Serenity Sketch is tactile and <em>in your body</em>. Your hand, an Apple Pencil, a stone, and mesmorising, impermenant brushtrokes. You're walked through each Practice by <strong>the Guide</strong>: a warm, unpretentious character who speaks <em>to</em> you, not <em>past</em> you. The Practice itself varies: copy a mysterious Glyph, draw inspiration from a starting image, paint along to echoing music, or fill a blank canvas with your imagination. Each session closes with quiet, introspective questions.
+            </p>
+            <p class="prose-gap-before">
+              The whole experience is framed as <strong>the Journey of Letting Go</strong>. A constellation of themed Paths the player explores at their own pace, on their own terms.
+            </p>
+          </div>
+        </div>
+        <div class="about-visual sigil-medallion" aria-hidden="true">
+          <img src="/assets/images/path-sigils/sigil-path-of-home-black.png" alt="" width="256" height="256" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="image-band" aria-label="Decorative image">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="/assets/images/hero1-1200x670.webp">
+        <source media="(min-width: 640px)" srcset="/assets/images/hero1-800x450.webp">
+        <img class="image-band__img" src="/assets/images/hero1-600x338.webp" alt="" loading="lazy">
+      </picture>
+      <div class="image-band__scrim" aria-hidden="true"></div>
+      <div class="container image-band__inner">
+        <p class="image-band__quote">You are invited to explore your creativity by playing with impermanence.</p>
+      </div>
+    </section>
+
+    <section id="features" class="section section-features">
+      <div class="container">
+        <p class="section-eyebrow">Features of the Experience</p>
+        <h2 class="display">Four ways into the Practice</h2>
+        <p class="lede">What you'll feel when you sit down with Serenity Sketch.</p>
+      </div>
+
+      <article class="pillar pillar--mechanic">
+        <div class="container pillar-grid">
+          <div class="pillar-kicker">
+            <span class="pillar-num">01</span>
+            <span class="pillar-label">Core mechanic</span>
+          </div>
+          <div class="pillar-text">
+            <h3 class="pillar-title">Painting with water: simple, timeless.</h3>
+            <p><strong>Trace water on stone</strong>, in a beautful simulation of the ancient Zen Practice. An elegant simplicity that reaches deeper than you expect. <strong>Let go</strong> of your creation as it gracefully evaporates. No undo. No save. No self-judgment. <strong>A Practice</strong> as old as brushwork, and as quiet as breath.</p>
+          </div>
+          <div class="pillar-media pillar-media--triple" aria-label="Three short clips of painting in different settings">
+            <video autoplay muted loop playsinline preload="none"
+              data-lazy-webm="/assets/vids/sanctuary_loop_mobile.webm"
+              data-lazy-mp4="/assets/vids/sanctuary_loop_desktop_350bit.mp4"
+              poster="/assets/images/Painting_Resonance-600x338.webp"
+              aria-label="Painting in a sanctuary setting"></video>
+            <video autoplay muted loop playsinline preload="none"
+              data-lazy-webm="/assets/vids/beach_loop_mobile.webm"
+              data-lazy-mp4="/assets/vids/beach_loop_desktop_350bit.mp4"
+              poster="/assets/images/Painting_ChildsPlay-600x338.webp"
+              aria-label="Painting on a beach"></video>
+            <video autoplay muted loop playsinline preload="none"
+              data-lazy-webm="/assets/vids/cliffs_loop_mobile.webm"
+              data-lazy-mp4="/assets/vids/cliffs_loop_desktop_350bit.mp4"
+              poster="/assets/images/Painting_Cycles-600x338.webp"
+              aria-label="Painting among cliffs"></video>
+          </div>
+        </div>
+      </article>
+
+      <article class="pillar pillar--journey">
+        <div class="container pillar-grid">
+          <div class="pillar-kicker">
+            <span class="pillar-num">02</span>
+            <span class="pillar-label">The Journey</span>
+          </div>
+          <div class="pillar-text">
+            <h3 class="pillar-title">The Journey of Letting Go.</h3>
+            <p class="pillar-lede">
+              Serenity Sketch is a Journey of distinct painting Practices, gathered into themed Paths. It all begins with the <strong>Path of Initiation</strong>: six hand-crafted, guided Practices that introduce the core principles of Letting Go echoing through everything that follows. It closes with a Trial&hellip;a subversive moment that surfaces how the Journey may be changing you. Complete the Trial, and new Paths are revealed (to be released in future content drops).
+            </p>
+          </div>
+          <figure class="map-figure">
+            <picture>
+              <source media="(max-width: 639px)" srcset="/assets/images/GameMap-mobile-600x338.webp 600w, /assets/images/GameMap-mobile-800x450.webp 800w, /assets/images/GameMap-mobile-1200x675.webp 1200w" sizes="100vw">
+              <source media="(min-width: 1024px)" srcset="/assets/images/GameMap-1200x675.webp">
+              <source media="(min-width: 640px)" srcset="/assets/images/GameMap-800x450.webp">
+              <img src="/assets/images/GameMap-600x338.webp" alt="The Journey of Letting Go map: Path of Initiation branching into five themed Paths" loading="lazy">
+            </picture>
+            <figcaption>Embark upon The Journey of Letting Go, in the world of Serenity Sketch.</figcaption>
+          </figure>
+          <div class="paths-list-group">
+            <p class="paths-list__eyebrow">Other paths you may cross along the way</p>
+            <ul class="paths-list">
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-imperfection-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Imperfection</strong><span>Rediscover the beauty in imperfection.</span></div>
+              </li>
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-selftrust-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Resonance</strong><span>Learning to trust what already lives inside.</span></div>
+              </li>
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-childplay-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Child's Play</strong><span>Paint like a kid again!</span></div>
+              </li>
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-lineage-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Lineage</strong><span>The weight and the levity of precedent.</span></div>
+              </li>
+              <li class="paths-list__solo">
+                <img src="/assets/images/path-sigils/sigil-path-of-cycles-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Cycles</strong><span>What returns, what passes away.</span></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="pillar pillar--settings">
+        <div class="container pillar-grid">
+          <div class="pillar-kicker">
+            <span class="pillar-num">03</span>
+            <span class="pillar-label">The settings</span>
+          </div>
+          <div class="pillar-text">
+            <h3 class="pillar-title">Distinct natural landscapes, each with their own stillness.</h3>
+            <p>Each Practice takes place in a different natural setting — all rendered in the game's distinctive illustrative style. Each one is its own invitation to slow down. They're not just backgrounds: they're part of the ritual.</p>
+          </div>
+          <div class="pillar-media" aria-label="Carousel of landscape settings">
+            <div class="settings-carousel" data-settings-carousel>
+              <div class="settings-carousel__viewport">
+                <div class="settings-carousel__track">
+                  <figure class="settings-carousel__slide" id="settings-slide-1" aria-labelledby="settings-caption-1" aria-hidden="false">
+                    <picture>
+                      <source media="(min-width: 640px)" data-srcset="/assets/images/Painting_Resonance-800x450.webp">
+                      <img data-src="/assets/images/Painting_Resonance-600x338.webp" alt="A rising sun reflecting on calm water" width="600" height="338" decoding="async">
+                    </picture>
+                    <figcaption id="settings-caption-1">A rising sun casts its reflection across the water before you.</figcaption>
+                  </figure>
+                  <figure class="settings-carousel__slide" id="settings-slide-2" aria-labelledby="settings-caption-2" aria-hidden="true">
+                    <picture>
+                      <source media="(min-width: 640px)" data-srcset="/assets/images/Painting_Lineage-800x450.webp">
+                      <img data-src="/assets/images/Painting_Lineage-600x338.webp" alt="A dense, ancient forest" width="600" height="338" decoding="async">
+                    </picture>
+                    <figcaption id="settings-caption-2">Your footsteps take you into a dense, ancient forest.</figcaption>
+                  </figure>
+                  <figure class="settings-carousel__slide" id="settings-slide-3" aria-labelledby="settings-caption-3" aria-hidden="true">
+                    <picture>
+                      <source media="(min-width: 640px)" data-srcset="/assets/images/Painting_Imperfection-800x450.webp">
+                      <img data-src="/assets/images/Painting_Imperfection-600x338.webp" alt="Weathered rocks in soft shadows" width="600" height="338" decoding="async">
+                    </picture>
+                    <figcaption id="settings-caption-3">The smooth, weathered rocks around you are bathed in soft shadows.</figcaption>
+                  </figure>
+                  <figure class="settings-carousel__slide" id="settings-slide-4" aria-labelledby="settings-caption-4" aria-hidden="true">
+                    <picture>
+                      <source media="(min-width: 640px)" data-srcset="/assets/images/Painting_Initiation-800x450.webp">
+                      <img data-src="/assets/images/Painting_Initiation-600x338.webp" alt="A stone on a warm shoreline" width="600" height="338" decoding="async">
+                    </picture>
+                    <figcaption id="settings-caption-4">The glowing sky lights the shoreline, warming the sand where you sit.</figcaption>
+                  </figure>
+                  <figure class="settings-carousel__slide" id="settings-slide-5" aria-labelledby="settings-caption-5" aria-hidden="true">
+                    <picture>
+                      <source media="(min-width: 640px)" data-srcset="/assets/images/Painting_Cycles-800x450.webp">
+                      <img data-src="/assets/images/Painting_Cycles-600x338.webp" alt="A mossy fallen tree" width="600" height="338" decoding="async">
+                    </picture>
+                    <figcaption id="settings-caption-5">Ahead, you spot a mossy fallen tree. All things come to pass.</figcaption>
+                  </figure>
+                  <figure class="settings-carousel__slide" id="settings-slide-6" aria-labelledby="settings-caption-6" aria-hidden="true">
+                    <picture>
+                      <source media="(min-width: 640px)" data-srcset="/assets/images/Painting_ChildsPlay-800x450.webp">
+                      <img data-src="/assets/images/Painting_ChildsPlay-600x338.webp" alt="A bright, lively forest passage" width="600" height="338" decoding="async">
+                    </picture>
+                    <figcaption id="settings-caption-6">You make your way through a bright and lively passage of the forest.</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div class="settings-carousel__arrows">
+                <button type="button" class="settings-carousel__btn settings-carousel__btn--prev" aria-label="Previous landscape" disabled><span aria-hidden="true">←</span></button>
+                <button type="button" class="settings-carousel__btn settings-carousel__btn--next" aria-label="Next landscape"><span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+            <div class="settings-carousel__dots" role="tablist" aria-label="Choose a landscape">
+              <button type="button" role="tab" class="settings-carousel__dot" aria-selected="true" aria-controls="settings-slide-1" data-slide="0"><span class="visually-hidden">Rising sun on water</span></button>
+              <button type="button" role="tab" class="settings-carousel__dot" aria-selected="false" aria-controls="settings-slide-2" data-slide="1"><span class="visually-hidden">Dense ancient forest</span></button>
+              <button type="button" role="tab" class="settings-carousel__dot" aria-selected="false" aria-controls="settings-slide-3" data-slide="2"><span class="visually-hidden">Weathered rocks in shadow</span></button>
+              <button type="button" role="tab" class="settings-carousel__dot" aria-selected="false" aria-controls="settings-slide-4" data-slide="3"><span class="visually-hidden">Stone and elaborate doodle</span></button>
+              <button type="button" role="tab" class="settings-carousel__dot" aria-selected="false" aria-controls="settings-slide-5" data-slide="4"><span class="visually-hidden">Mossy fallen tree</span></button>
+              <button type="button" role="tab" class="settings-carousel__dot" aria-selected="false" aria-controls="settings-slide-6" data-slide="5"><span class="visually-hidden">Lively forest passage</span></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pillar pillar--guided">
+        <div class="container pillar-grid">
+          <div class="pillar-kicker">
+            <span class="pillar-num">04</span>
+            <span class="pillar-label">Be guided</span>
+          </div>
+          <div class="pillar-text">
+            <h3 class="pillar-title">The Guide walks with you.</h3>
+            <p>Throughout the Journey, the Guide leads you through each Practice. We chose a warm, unpretentious character who invites you to experiment, reflect, and play...more like a kind confidant than an app notification or an elevated guru. The Guide speaks <em>to</em> you, not <em>past</em> you. And then gets out of the way, once you find your own flow.</p>
+            <br>
+            <p>Each Practice concludes with a few reflective questions. You may find that there was more going on under the surface than you expected.</p>
+            <ul class="pillar-prompt-list">
+              <li>"Was it easy to explore with your brush, or did you wish for a goal?"</li>
+              <li>"When you first started, perhaps you approached your copy like a grown-up: precisely, critically, correctly."</li>
+            </ul>
+          </div>
+          <div class="pillar-media pillar-media--audio">
+            <blockquote class="audio-quote">
+              <p>"Since it all fades anyway, why not experiment?"</p>
+              <footer>— The Guide, voiced by Jemima Cardenas Meijers</footer>
+            </blockquote>
+            <audio controls preload="none" playsinline class="audio-player" data-lazy-audio="/assets/audio/the_guide.mp3" aria-label="Clip from the Guide">
+              Your browser does not support audio playback.
+            </audio>
+            <p class="audio-note">Calming natural soundscapes, ASMR brushstrokes, singing stones, a ceremonial gong, and guided narration. Sound is part of the story.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <aside class="pullquote-band" aria-label="Tagline">
+      <div class="container pullquote-layout">
+        <div class="pullquote-sigil sigil-medallion sigil-medallion--light" aria-hidden="true">
+          <img src="/assets/images/path-sigils/sigil-path-of-lettinggo-black.png" alt="" width="409" height="409" loading="lazy">
+        </div>
+        <p class="pullquote">Letting Go is the reward.</p>
+      </div>
+    </aside>
+
+    <section id="quotes" class="section section-quotes">
+      <div class="container">
+        <p class="section-eyebrow">Player Reactions</p>
+        <h2 class="display">What stays with people.</h2>
+
+        <figure class="quote-card quote-card--featured">
+          <blockquote>
+            <p>"I went from thinking 'I'm not an artist' to feeling liberated to create!"</p>
+          </blockquote>
+          <figcaption>Player · responding to "how did it make you feel?"</figcaption>
+        </figure>
+
+        <div class="quote-grid">
+          <figure class="quote-card">
+            <blockquote><p>"A space of quiet in an overly stimulating and loud world."</p></blockquote>
+            <figcaption>Player at Indigo 2025</figcaption>
+          </figure>
+
+          <figure class="quote-card">
+            <blockquote><p>Many neurodivergent and anxiety-prone players expressed enthusiasm and relief.</p></blockquote>
+            <figcaption>Indigo 2025 observation</figcaption>
+          </figure>
+
+          <div class="quote-grid__pair">
+            <figure class="quote-card quote-card--tall">
+              <blockquote><p>"A meditative painting game which looks simple on the surface, but tackles subversive habits of modern narratives about doing and purpose."</p></blockquote>
+              <figcaption>Player · written feedback</figcaption>
+            </figure>
+
+            <figure class="quote-card quote-card--tall">
+              <blockquote><p>"When I was painting and I realised it was genuinely relaxing me! It's rare for this to be the case with games."</p></blockquote>
+              <figcaption>Survey respondent · 13/13 felt "relaxed"</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="creators" class="section section-creators">
+      <div class="container">
+        <p class="section-eyebrow">For content creators</p>
+        <h2 class="display">What to lead with</h2>
+        <p class="lede">Hooks that have landed for the people who've already played it.</p>
+        <ol class="talking-points">
+          <li>
+            <h3>Lead with the Timelapse Playback.</h3>
+            <p>At the end of every guided Practice, the player watches a sped-up replay of their own painting. It lands every time we've shown it. For your video: <strong>it's the best B-roll the game gives you</strong>, and it cuts perfectly with reaction shots. If you're choosing what to put in the first 15 seconds, this is it.</p>
+          </li>
+          <li>
+            <h3>Need a one-liner to describe Serenity Sketch? Try one of these.</h3>
+            <p>Pick the comparison that fits your audience and channel:</p>
+            <ul class="quote-bait">
+              {game.comparisons.map(c => <li><em>"{c}"</em></li>)}
+            </ul>
+          </li>
+          <li>
+            <h3>Open with "I'm not an artist, but..."</h3>
+            <p>Many of your viewers have felt this. Most of our players have too! Set viewers up with the assumption that they "can't draw," then let the game show otherwise. <strong>The arc of, "I'm not an artist"</strong> to <strong>"I feel liberated to create!"</strong> is something we hear from many early players.</p>
+          </li>
+          <li>
+            <h3>This is the antidote to doomscrolling. And it's still on a screen.</h3>
+            <p>The ritual bell that opens every session. The sounds of a natural environment settling around you. The ASMR whisper of brush on stone, as you paint with your own finger. A Guide who never tells you what to feel, and somehow makes you feel seen. Serenity Sketch gives you <strong>something in your hands instead of something in your head</strong>.</p>
+          </li>
+          <li>
+            <h3>The game Map frames the Journey — show it!</h3>
+            <p><strong>Players who see the Map love it!</strong> You've just moved through your first Practice, and the Map appears, revealing how much world is still ahead. The upcoming Journey of Letting Go takes on a new scale.</p>
+          </li>
+          <li>
+            <h3>The Trial is the editorial hook.</h3>
+            <p>Each Path ends with a moment where the game's own rules change without warning. The player has spent the whole Path of Initiation accepting small impermanence - the evaporating water. The Trial asks them to accept something larger. This is where <strong>Serenity Sketch stops describing Letting Go and actually makes you do it</strong>. Creators who've played it will know what to say. Viewers who haven't will want to find out.</p>
+          </li>
+        </ol>
+        <div class="creator-callout">
+          <div class="creator-callout__text">
+            <p class="creator-callout__label">For your audience</p>
+            <p class="creator-callout__meta">The first two Practices are completely free for anyone to try — no account required. Unlocking the full Path of Initiation (all eight Practices and the Trial) is a one-time payment of €4.99.</p>
+          </div>
+        </div>
+        <div class="creator-callout">
+          <div class="creator-callout__text">
+            <p class="creator-callout__label">Pathfinders - our Founding Creator Program</p>
+            <p class="creator-callout__meta">A small founding circle (~30 creators) who get special access: full access to the Path of Initiation before launch (all eight Practices and the Trial, not just the three free ones), lifetime free access to new content as it launches, and a direct line to the game developers. It's invite-only, but if this resonates and you'd like to be considered, do <a href={`mailto:${game.pressContact}`}>reach out</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="downloads" class="section section-downloads">
+      <div class="container">
+        <p class="section-eyebrow">Press kit assets</p>
+        <h2 class="display">Download everything</h2>
+        <a class="download-primary" href="https://assets.press.serenitysketch.com/serenity-sketch-presskit-full.zip">
+          <div class="download-primary__text">
+            <span class="download-label">Full press kit</span>
+            <span class="download-meta">Logos · screenshots · video · audio — all in one .zip</span>
+          </div>
+          <span class="download-arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="download-note">Can't see what you need? Email <a href={`mailto:${game.pressContact}`}>{game.pressContact}</a> and we'll cut a custom asset ASAP.</p>
+      </div>
+    </section>
+
+    <section id="studio" class="section section-studio">
+      <div class="container two-col">
+        <div>
+          <p class="section-eyebrow">Studio and team</p>
+          <div class="studio-header">
+            <a class="studio-mark-link" href={game.studioUrl} target="_blank" rel="noreferrer" aria-label="Copper Coin studio website">
+              <img
+                class="studio-mark"
+                src="/assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-256.png"
+                srcset="/assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-256.webp 1x,
+                        /assets/images/logos/logo-variants-copper-coin/black_transparent/logo-black_transparent-512.webp 2x"
+                alt=""
+                width="88" height="88"
+                loading="lazy">
+            </a>
+            <h2 class="display">{game.developer}</h2>
+          </div>
+          <p class="lede">
+            Copper Coin makes games for the second half of life. A solo indie studio in the Netherlands, founded by ex-financier Joshua Veit and supported by a trusted circle of freelance collaborators. We started Serenity Sketch because we want to see more games that take care of the player. We believe an inner quiet and a creative life aren't separate things, and this game is an attempt to prove it.
+          </p>
+        </div>
+        <ul class="team">
+          {game.team.map(member => (
+            <li>
+              <span>{member.role}</span>
+              <a href={member.url} target="_blank" rel="noreferrer"><strong>{member.name}</strong></a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-contact">
+      <div class="container">
+        <p class="section-eyebrow">Get in touch</p>
+        <h2 class="display">Tell us what you're working on.</h2>
+        <p class="lede">
+          We're human, we reply, we appreciate your interest! Ask for a TestFlight invite so you can try a demo. Or pitch a video idea. Or just say hi, if what we're making resonates with you.
+        </p>
+        <ul class="contact-list">
+          <li><span>Press &amp; creators</span><a href={`mailto:${game.pressContact}`}>{game.pressContact}</a></li>
+          <li><span>Studio site</span><a href={game.studioUrl} target="_blank" rel="noreferrer">{game.studioUrl.replace('https://', '')}</a></li>
+          <li><span>Apple App Store</span><span class="contact-pending">{game.appStoreUrl ? game.appStoreUrl : 'Link coming soon'}</span></li>
+          <li><span>Steam (coming 2027)</span><a href={game.steamUrl} target="_blank" rel="noreferrer">wishlist link</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wrap">
+        <p class="footer-brand">© 2026 {game.developer} · {game.name}</p>
+        <p class="footer-note">Last updated {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+      </div>
+      <p class="legal-attribution">
+        Apple and iPad are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.
+      </p>
+    </div>
+  </footer>
+
+  <script src="/scripts/main.js" is:inline></script>
+</Press>

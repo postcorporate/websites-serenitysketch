@@ -1,0 +1,256 @@
+---
+import game from '../../../shared/game.json';
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  author?: string;
+  category?: string;
+  heroImage?: string;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  author = 'Josh Veit',
+  category,
+  heroImage,
+} = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const ogImage = heroImage ?? '/assets/images/hero1-1200x670.webp';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content={description}>
+  <meta property="og:title" content={`${title} — ${game.name}`}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={`https://serenitysketch.com${ogImage}`}>
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="/assets/images/path-sigils/sigil-path-of-initiation-black.png">
+  <title>{title} — {game.name}</title>
+  <link rel="preload" href="/assets/fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles/fonts.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <style is:global>
+    :root {
+      --color-bg:         var(--paper);
+      --color-text:       var(--ink);
+      --color-text-muted: var(--ink-soft);
+      --color-accent:     var(--copper);
+      --color-accent-dark:var(--copper-deep);
+      --color-border:     var(--rule);
+    }
+    html { scroll-behavior: smooth; }
+    /* Blog pages have no hero video — header is always opaque */
+    .site-header {
+      background: rgba(246, 239, 227, 0.95) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--rule) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/">
+        <span class="brand-mark"><img src="/assets/images/path-sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
+        <span class="brand-name">{game.name}</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#signup">Sign up</a></li>
+          <li><a href="/blog" aria-current="page">Blog</a></li>
+          <li><a href="/presskit">Press kit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="blog-post">
+
+      <header class="blog-post__header">
+        <div class="container blog-post__header-inner">
+          {category && <p class="section-eyebrow">{category}</p>}
+          <h1 class="blog-post__title">{title}</h1>
+          <p class="blog-post__meta">
+            <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+            {author && <span class="blog-post__author"> · {author}</span>}
+          </p>
+        </div>
+      </header>
+
+      {heroImage && (
+        <div class="blog-post__hero">
+          <div class="container">
+            <img src={heroImage} alt="" class="blog-post__hero-img" loading="eager">
+          </div>
+        </div>
+      )}
+
+      <div class="container">
+        <div class="blog-post__body prose">
+          <slot />
+        </div>
+
+        <footer class="blog-post__footer">
+          <a href="/blog" class="blog-back-link">← All posts</a>
+        </footer>
+      </div>
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wrap">
+        <p class="footer-brand">© 2026 <a href={game.studioUrl}>{game.developer}</a> · {game.name}</p>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="/blog">Blog</a>
+          <a href="/presskit">Press kit</a>
+          <a href={`mailto:${game.pressContact}`}>{game.pressContact}</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    .blog-post__header {
+      padding: clamp(3rem, 6vw, 5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .blog-post__header-inner {
+      max-width: 720px;
+    }
+
+    .blog-post__title {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .blog-post__meta {
+      font-size: 0.875rem;
+      color: var(--ink-soft);
+    }
+
+    .blog-post__author {
+      color: var(--ink-soft);
+    }
+
+    .blog-post__hero {
+      padding: 2rem 0;
+    }
+
+    .blog-post__hero-img {
+      width: 100%;
+      border-radius: var(--radius, 8px);
+      display: block;
+    }
+
+    .blog-post__body {
+      max-width: 720px;
+      padding: clamp(2rem, 4vw, 3.5rem) 0;
+      line-height: 1.75;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .blog-post__body h2 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 2.5rem 0 0.75rem;
+    }
+
+    .blog-post__body h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin: 2rem 0 0.5rem;
+    }
+
+    .blog-post__body p {
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-post__body a {
+      color: var(--copper-deep, var(--copper));
+      text-decoration: underline;
+    }
+
+    .blog-post__body blockquote {
+      border-left: 3px solid var(--copper);
+      margin: 2rem 0;
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    .blog-post__body img {
+      max-width: 100%;
+      border-radius: var(--radius, 8px);
+    }
+
+    .blog-post__body ul,
+    .blog-post__body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-post__body li {
+      margin-bottom: 0.4rem;
+    }
+
+    .blog-post__footer {
+      padding: 2rem 0 3rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .blog-back-link {
+      font-size: 0.875rem;
+      color: var(--copper-deep, var(--copper));
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .blog-back-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.65;
+      font-size: 0.875rem;
+    }
+    .footer-links a:hover { opacity: 1; }
+  </style>
+
+</body>
+</html>

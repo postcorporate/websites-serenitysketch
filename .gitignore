@@ -1,31 +1,4 @@
-.DS_Store
-Thumbs.db
-*.env
-*.local
-.idea/
-.vscode/
 node_modules/
-__pycache__/
-*.pyc
-.cache/
-temp/
-.env.local
-
-# Temporary/lock files created by Excel/LibreOffice
-~$*.xls
-~$*.xlsx
-.~lock.*#
-.~lock.*.xls#
-.~lock.*.xlsx#
-
-# Temporary files created by Microsoft Office apps
-~$*.doc
-~$*.docx
-~$*.docm
-~$*.dotx
-~$*.dotm
-~$*.ppt
-~$*.pptx
-~$*.pptm
-~$*.xlsm
-~$*.xlsb
+site/dist/
+site/.astro/
+.DS_Store

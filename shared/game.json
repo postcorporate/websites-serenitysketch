@@ -1,0 +1,38 @@
+{
+  "name": "Serenity Sketch",
+  "tagline": "The self-care app that plays like a game",
+  "shortDescription": "Paint with water. Follow a gentle guide. Find rest in letting go.",
+  "longDescription": "A self-care ritual where each evaporating brushstroke brings freedom and reflection. Inspired by the Zen Practice of water painting, you trace water on stone, watch it disappear, and release the need for permanence. Most self-care apps are serious and in your head. Serenity Sketch is tactile and in your body.",
+  "oneLiner": "Buddha Board meets Procreate.",
+  "comparisons": [
+    "A game that takes care of you.",
+    "Buddha Board meets Procreate.",
+    "Mindfulness without the meditation cushion.",
+    "The Calm app, but tactile."
+  ],
+  "developer": "Copper Coin",
+  "studioUrl": "https://coppercoin.nl",
+  "studioLocation": "Netherlands",
+  "platform": "iPad",
+  "platformNote": "Apple Pencil or Touch",
+  "launch": "Summer 2026",
+  "price": "Free to start · €4.99 to unlock",
+  "pricingNote": "First 2 Practices are free, no account required. Unlock the full Path of Initiation (8 Practices + Trial) for €4.99.",
+  "website": "https://serenitysketch.com",
+  "pressKitUrl": "https://press.serenitysketch.com",
+  "pressContact": "josh@coppercoin.nl",
+  "steamUrl": "https://store.steampowered.com/app/4148470/Serenity_Sketch/",
+  "appStoreUrl": null,
+  "trailerYoutubeId": "b32JXo8g6tw",
+  "trailerYoutubeTitle": "Serenity Sketch — Teaser Trailer",
+  "team": [
+    { "role": "Project Lead and Designer", "name": "Joshua Veit", "url": "https://www.linkedin.com/in/joshua-veit-gamedev/" },
+    { "role": "Lead Artist", "name": "Ties Groen", "url": "https://tiesgroen.com/" },
+    { "role": "Lead Designer", "name": "Meggy Pepelanova", "url": "https://www.linkedin.com/in/meggypepelanova/" },
+    { "role": "Lead Programmer", "name": "Rosa Corstjens", "url": "https://www.rcdev.games/" },
+    { "role": "Sound Design", "name": "Camiel Povel", "url": "https://camelsounds.notion.site/camel" },
+    { "role": "Composer", "name": "Edwin Dizer", "url": "https://soundcloud.com/user-668111672" },
+    { "role": "2D Artist", "name": "Kris Dankye", "url": "https://www.krisdankye.com/" },
+    { "role": "Voice Acting", "name": "Jemima Cardenas Meijers", "url": "https://www.jemimajohanna.com/" }
+  ]
+}

@@ -1,0 +1,554 @@
+---
+import Main from '../layouts/Main.astro';
+import game from '../../../shared/game.json';
+---
+
+<Main>
+
+  <!-- NAV — same structure as presskit, same CSS -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top">
+        <span class="brand-mark"><img src="/assets/images/path-sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
+        <span class="brand-name">{game.name}</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#trailer">Trailer</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#signup">Sign up</a></li>
+          <li><a href="/presskit">Press kit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         1. HERO — identical structure to presskit hero.
+         Differences: eyebrow has no "Press Kit ·", lead replaced
+         with feature chips, single CTA.
+         ============================================================ -->
+    <section id="top" class="hero" aria-label="Hero">
+      <video class="hero-art" id="hero-video"
+        autoplay muted loop playsinline
+        preload="metadata"
+        poster="/assets/images/presskit_heroVid_still-800x450.webp">
+        <source src="/assets/vids/presskit_heroVid_loop_compressed.mp4" type="video/mp4">
+        <img src="/assets/images/presskit_heroVid_still-800x450.webp"
+             srcset="/assets/images/presskit_heroVid_still-600x338.webp 600w,
+                     /assets/images/presskit_heroVid_still-800x450.webp 800w,
+                     /assets/images/presskit_heroVid_still-1200x675.webp 1200w,
+                     /assets/images/presskit_heroVid_still-1920x1080.webp 1920w"
+             sizes="100vw"
+             alt="Water painting on stone, mid-evaporation">
+      </video>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="container hero-copy">
+        <p class="eyebrow">&nbsp;</p>
+        <h1 class="hero-logo">
+          <img
+            src="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp"
+            srcset="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-small-320x151.webp 320w,
+                    /assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp 640w,
+                    /assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-large-1280x605.webp 1280w"
+            sizes="(max-width: 600px) 240px, 400px"
+            alt={game.name}
+            width="640" height="302"
+            loading="eager" fetchpriority="high">
+        </h1>
+        <p class="tagline">{game.tagline}</p>
+
+        <!-- Feature chips — replaces the lead paragraph from presskit -->
+        <ul class="hero-chips" id="features">
+          <li class="hero-chip">
+            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/brush-small-thick.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+            <span>Paint<br>with water</span>
+          </li>
+          <li class="hero-chip">
+            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-sanctuary-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+            <span>Follow<br>a gentle guide</span>
+          </li>
+          <li class="hero-chip">
+            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-initiation-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+            <span>Find rest<br>in Letting Go</span>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. ABOUT
+         Condensed from presskit. Earns the trailer.
+         ============================================================ -->
+    <section id="about" class="section section-about section-about--no-rule">
+      <div class="container about-layout">
+        <div class="about-content">
+          <p class="section-eyebrow">About the game</p>
+          <h2 class="display">Paint water upon stone. Breathe. Let go.</h2>
+          <div class="prose">
+            <p class="lede"><strong>A self-care ritual where each evaporating brushstroke brings freedom and reflection. Inspired by the Zen practice of water painting, you trace water on stone, watch it disappear, and release the need for permanence.</strong></p>
+            <p>
+              Most self-care apps are serious and <em>in your head</em>. Serenity Sketch is tactile and <em>in your body</em>. Your hand, an Apple Pencil, a stone, and mesmerising, impermanent brushstrokes. You're walked through each Practice by <strong>the Guide</strong>: a warm, unpretentious character who speaks <em>to</em> you, not <em>past</em> you.
+            </p>
+          </div>
+        </div>
+        <div class="about-visual sigil-medallion" aria-hidden="true">
+          <img src="/assets/images/path-sigils/sigil-path-of-home-black.png" alt="" width="256" height="256" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. TRAILER
+         ============================================================ -->
+    <section id="trailer" class="section section-trailer" aria-label="Trailer">
+      <div class="container">
+        <figure class="trailer-figure">
+          <div class="trailer-facade" tabindex="0"
+            data-youtube-id={game.trailerYoutubeId}
+            data-youtube-title={game.trailerYoutubeTitle}>
+            <img class="trailer-facade__thumb"
+              src={`https://i.ytimg.com/vi/${game.trailerYoutubeId}/maxresdefault.jpg`}
+              srcset={`https://i.ytimg.com/vi/${game.trailerYoutubeId}/hqdefault.jpg 480w, https://i.ytimg.com/vi/${game.trailerYoutubeId}/sddefault.jpg 640w, https://i.ytimg.com/vi/${game.trailerYoutubeId}/maxresdefault.jpg 1280w`}
+              sizes="(min-width: 760px) 1080px, 100vw"
+              alt=""
+              width="1280" height="720"
+              loading="lazy" decoding="async">
+            <button type="button" class="trailer-facade__play"
+              aria-label={`Play ${game.trailerYoutubeTitle}`}></button>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         "You are invited" full-bleed image band
+         ============================================================ -->
+    <section class="image-band" aria-label="Decorative image">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="/assets/images/hero1-1200x670.webp">
+        <source media="(min-width: 640px)" srcset="/assets/images/hero1-800x450.webp">
+        <img class="image-band__img" src="/assets/images/hero1-600x338.webp" alt="" loading="lazy">
+      </picture>
+      <div class="image-band__scrim" aria-hidden="true"></div>
+      <div class="container image-band__inner">
+        <p class="image-band__quote">You are invited to explore your creativity by playing with impermanence.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. FEATURES — pillar layout (shared with presskit)
+         ============================================================ -->
+    <section id="features" class="section section-features">
+
+      <article class="pillar">
+        <div class="container pillar-grid">
+          <div class="pillar-kicker">
+            <span class="pillar-num">01</span>
+            <span class="pillar-label">The practice</span>
+          </div>
+          <div class="pillar-text">
+            <h3 class="pillar-title">Painting with water: simple, timeless</h3>
+            <p>Trace water on stone. Your painting evaporates. No undo. No save. No self-judgment. A practice as old as brushwork, and as quiet as breath.</p>
+          </div>
+          <div class="pillar-media">
+            <video autoplay muted loop playsinline preload="none"
+              data-lazy-webm="/assets/vids/beach_loop_compressed_960x540_16-9.webm"
+              data-lazy-mp4="/assets/vids/beach_loop_compressed_960x540_16-9.mp4"
+              poster="/assets/images/Painting_Resonance-600x338.webp"
+              aria-label="Painting in a sanctuary setting"></video>
+          </div>
+        </div>
+      </article>
+
+      <article class="pillar">
+        <div class="container pillar-grid">
+          <div class="pillar-kicker">
+            <span class="pillar-num">02</span>
+            <span class="pillar-label">The journey</span>
+          </div>
+          <div class="pillar-text">
+            <h3 class="pillar-title">A guided journey of Letting Go</h3>
+            <p>Your journey begins with the <strong>Path of Initiation</strong> — six guided Practices that introduce the core principles of Letting Go. Each closes with quiet, introspective questions. Complete the Path, face the Trial, and discover how the journey may be changing you.</p>
+          </div>
+          <figure class="map-figure">
+            <picture>
+              <source media="(max-width: 639px)" srcset="/assets/images/GameMap-mobile-600x338.webp 600w, /assets/images/GameMap-mobile-800x450.webp 800w, /assets/images/GameMap-mobile-1200x675.webp 1200w" sizes="100vw">
+              <source media="(min-width: 1024px)" srcset="/assets/images/GameMap-1200x675.webp">
+              <source media="(min-width: 640px)" srcset="/assets/images/GameMap-800x450.webp">
+              <img src="/assets/images/GameMap-600x338.webp" alt="The Journey of Letting Go map" loading="lazy">
+            </picture>
+            <figcaption>Embark upon The Journey of Letting Go, in the world of Serenity Sketch.</figcaption>
+          </figure>
+          <div class="paths-list-group">
+            <p class="paths-list__eyebrow">Other paths you may cross along the way</p>
+            <ul class="paths-list">
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-imperfection-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Imperfection</strong><span>Rediscover the beauty in imperfection.</span></div>
+              </li>
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-selftrust-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Resonance</strong><span>Learning to trust what already lives inside.</span></div>
+              </li>
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-childplay-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Child's Play</strong><span>Paint like a kid again!</span></div>
+              </li>
+              <li>
+                <img src="/assets/images/path-sigils/sigil-path-of-lineage-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Lineage</strong><span>The weight and the levity of precedent.</span></div>
+              </li>
+              <li class="paths-list__solo">
+                <img src="/assets/images/path-sigils/sigil-path-of-cycles-black.png" alt="" width="40" height="40" loading="lazy">
+                <div><strong>Path of Cycles</strong><span>What returns, what passes away.</span></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="pillar">
+        <div class="container pillar-grid">
+          <div class="pillar-kicker">
+            <span class="pillar-num">03</span>
+            <span class="pillar-label">The guide</span>
+          </div>
+          <div class="pillar-text">
+            <h3 class="pillar-title">Someone walks with you</h3>
+            <p>A warm, unpretentious voice who invites you to experiment, reflect, and play. The Guide speaks to you, not past you, then gets out of the way once you find your flow.</p>
+          </div>
+          <div class="pillar-media">
+            <blockquote class="audio-quote">
+              <p>"Since it all fades anyway, why not experiment?"</p>
+            </blockquote>
+            <audio controls preload="none" playsinline class="audio-player"
+              data-lazy-audio="/assets/audio/the_guide.mp3"
+              aria-label="Clip from the Guide">
+              Your browser does not support audio playback.
+            </audio>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ============================================================
+         5. PULLQUOTE BAND
+         ============================================================ -->
+    <aside class="pullquote-band" aria-label="Tagline">
+      <div class="container pullquote-layout">
+        <div class="pullquote-sigil sigil-medallion sigil-medallion--light" aria-hidden="true">
+          <img src="/assets/images/path-sigils/sigil-path-of-lettinggo-black.png" alt="" width="409" height="409" loading="lazy">
+        </div>
+        <p class="pullquote">Letting Go is the reward.</p>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         6. QUOTES
+         Two player reactions, simple treatment.
+         ============================================================ -->
+    <section class="section section-quotes-simple">
+      <div class="container">
+        <p class="section-eyebrow">What stays with people</p>
+        <div class="quotes-pair">
+          <figure class="quote-card quote-card--featured">
+            <blockquote>
+              <p>"I went from thinking 'I'm not an artist' to feeling liberated to create!"</p>
+            </blockquote>
+            <figcaption>Player, responding to "how did it make you feel?"</figcaption>
+          </figure>
+          <figure class="quote-card quote-card--featured">
+            <blockquote>
+              <p>"A space of quiet in an overly stimulating and loud world."</p>
+            </blockquote>
+            <figcaption>Player at Indigo 2025</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. SIGNUP (primary)
+         Mailerlite embed with CSS overrides below.
+         ============================================================ -->
+    <section id="signup" class="section section-signup">
+      <div class="container signup-inner">
+        <h2 class="signup-heading">Stay in the loop.</h2>
+        <p class="signup-sub">Subscribe to our newsletter, for launch announcements, updates, and early access.</p>
+
+        <script is:inline>
+          (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+          .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+          n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+          (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+          ml('account', '1239190');
+        </script>
+
+        <div class="ml-embedded" data-form="99JQoa"></div>
+      </div>
+    </section>
+
+    <script is:inline>
+      (function () {
+        var COPPER = '#B26A43';
+        var PAPER  = '#F6EFE3';
+        var SANS   = '"Baloo 2", system-ui, sans-serif';
+        var RADIUS = '14px';
+
+        function styleML() {
+          // Hide ML's own copy block
+          document.querySelectorAll('.ml-form-embedContent').forEach(function (el) {
+            el.style.setProperty('display', 'none', 'important');
+          });
+          // Strip ML wrapper background/border
+          document.querySelectorAll('.ml-form-embedWrapper, .ml-form-embedBody').forEach(function (el) {
+            el.style.setProperty('background', 'transparent', 'important');
+            el.style.setProperty('border', 'none', 'important');
+            el.style.setProperty('box-shadow', 'none', 'important');
+            el.style.setProperty('padding', '0', 'important');
+          });
+          // Style email input
+          document.querySelectorAll('.ml-embedded input[type="email"]').forEach(function (el) {
+            el.style.setProperty('font-family', SANS, 'important');
+            el.style.setProperty('font-size', '1rem', 'important');
+            el.style.setProperty('border-radius', RADIUS, 'important');
+          });
+          // Style submit button
+          document.querySelectorAll('.ml-embedded button[type="submit"]').forEach(function (el) {
+            el.style.setProperty('background', COPPER, 'important');
+            el.style.setProperty('color', PAPER, 'important');
+            el.style.setProperty('font-family', SANS, 'important');
+            el.style.setProperty('font-size', '1rem', 'important');
+            el.style.setProperty('font-weight', '600', 'important');
+            el.style.setProperty('border-radius', RADIUS, 'important');
+            el.style.setProperty('border', 'none', 'important');
+          });
+        }
+
+        styleML();
+        var observer = new MutationObserver(styleML);
+        observer.observe(document.body, { childList: true, subtree: true });
+        window.addEventListener('load', function () { styleML(); setTimeout(styleML, 800); });
+      })();
+    </script>
+
+    <!-- ============================================================
+         7. FAQ
+         ============================================================ -->
+    <section id="faq" class="section section-faq">
+      <div class="container">
+        <p class="section-eyebrow">Questions</p>
+        <h2 class="display">Frequently asked</h2>
+        <dl class="faq-list">
+
+          <div class="faq-item">
+            <dt>Who is making this?</dt>
+            <dd>Serenity Sketch is made by <a href={game.studioUrl}>Copper Coin</a>, a solo indie studio in the Netherlands, founded by Joshua Veit with a trusted circle of freelance collaborators for art, music, programming, and voice.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Is this a self-care app, or a game?</dt>
+            <dd>Why not both! It has the structure of a game: a Journey through an abstract world, with immersive environments and sounds. It never demands you to be 'serious', or sit still with your eyes close. It just invites you to slow down and paint.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Do I need to be able to draw?</dt>
+            <dd>Not at all! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Most players who have tried it go from "I'm not an artist" to "I feel liberated to create."</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>What if I've never played a video game?</dt>
+            <dd>We designed Serenity Sketch to be approachable and intuitive. No gaming experience required!</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Can I play for free? How much does it cost?</dt>
+            <dd>The first two Practices are free. To unlock the rest, it is a one-time payment of €4.99 (or your local currency equivalent). That gets you the full Path of Initiation, the Trial of Initiation, and your Home Sanctuary.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>What device do I need?</dt>
+            <dd>An iPad, with Apple Pencil or your finger. We are exploring other platforms for future releases.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Will there be more content after launch?</dt>
+            <dd>We would love to make more Paths! The Path of Initiation introduces you to intersections with other Paths, which we hope will become future content. Whether we do depends entirely on how the game lands. If you want to see more, it helps us immensely if you buy the game, and leave a review in the App Store.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>When does it launch?</dt>
+            <dd>{game.launch}. Sign up above and we will let you know the day it is out.</dd>
+          </div>
+
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wrap">
+        <p class="footer-brand">© 2026 <a href={game.studioUrl}>{game.developer}</a> · {game.name}</p>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="/presskit">Press kit</a>
+          <a href={game.steamUrl} target="_blank" rel="noreferrer">Steam wishlist</a>
+          <a href={`mailto:${game.pressContact}`}>{game.pressContact}</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Trailer facade + lazy video JS (subset of presskit main.js) -->
+  <script src="/scripts/main.js" is:inline></script>
+
+  <style>
+    /* ----------------------------------------------------------------
+       LANDING PAGE — additional styles only
+       Hero chips now live in main.css (shared with presskit).
+    ---------------------------------------------------------------- */
+
+
+
+    .beat-media--quote {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Quotes — simple two-up */
+    .quotes-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 600px) {
+      .quotes-pair { grid-template-columns: 1fr; }
+    }
+
+    /* Signup sections */
+    .section-signup,
+    .section-signup-footer {
+      text-align: center;
+      background: var(--sand);
+      padding-top: clamp(1.5rem, 3vw, 2rem);
+      padding-bottom: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .signup-inner {
+      max-width: 480px;
+    }
+
+    .signup-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .signup-sub {
+      color: var(--ink-soft);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Mailerlite overrides — must use :global() because ML injects HTML
+       after page render; Astro's scoped hash won't be on those elements. */
+    :global(.ml-embedded .ml-form-embedWrapper) {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    :global(.ml-embedded .ml-form-embedBody) {
+      padding: 0 !important;
+      background: transparent !important;
+    }
+    /* Hide ML's own heading and description — we supply our own */
+    :global(.ml-embedded .ml-form-embedContent) {
+      display: none !important;
+    }
+    :global(.ml-embedded input[type="email"]) {
+      border: 1px solid var(--rule) !important;
+      border-radius: var(--radius) !important;
+      background: var(--paper) !important;
+      font-family: var(--sans) !important;
+      font-size: 1rem !important;
+      color: var(--ink) !important;
+      padding: 0.75rem 1rem !important;
+    }
+    :global(.ml-embedded button[type="submit"]) {
+      background: var(--copper) !important;
+      color: var(--paper) !important;
+      font-family: var(--sans) !important;
+      font-size: 0.9375rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em !important;
+      border-radius: var(--radius) !important;
+      padding: 0.75rem 1.5rem !important;
+      cursor: pointer !important;
+      border: none !important;
+    }
+    :global(.ml-embedded button[type="submit"]:hover) {
+      opacity: 0.88 !important;
+    }
+
+    /* FAQ */
+    .faq-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .faq-item {
+      border-top: 1px solid var(--c-rule, #e0d8ce);
+      padding: 1.5rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid var(--c-rule, #e0d8ce);
+    }
+
+    .faq-item dt {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item dd {
+      color: var(--c-text-secondary, #6b5e52);
+      line-height: 1.65;
+    }
+
+    .faq-item dd a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.65;
+      font-size: 0.875rem;
+    }
+    .footer-links a:hover { opacity: 1; }
+  </style>
+
+</Main>
