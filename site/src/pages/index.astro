@@ -8,7 +8,7 @@ import game from '../../../shared/game.json';
   <!-- NAV — same structure as presskit, same CSS -->
   <header class="site-header">
     <div class="container nav-wrap">
-      <a class="brand" href="#top">
+      <a class="brand" href="/">
         <span class="brand-mark"><img src="/assets/images/path-sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
         <span class="brand-name">{game.name}</span>
       </a>
@@ -35,8 +35,9 @@ import game from '../../../shared/game.json';
       <video class="hero-art" id="hero-video"
         autoplay muted loop playsinline
         preload="metadata"
-        poster="/assets/images/presskit_heroVid_still-800x450.webp">
-        <source src="/assets/vids/presskit_heroVid_loop_compressed.mp4" type="video/mp4">
+        poster="/assets/images/presskit_heroVid_still-800x450.webp"
+        data-src-desktop="/assets/vids/presskit_heroVid_loop_compressed_desktop.mp4"
+        data-src-mobile="/assets/vids/presskit_heroVid_loop_compressed_mobile.mp4">
         <img src="/assets/images/presskit_heroVid_still-800x450.webp"
              srcset="/assets/images/presskit_heroVid_still-600x338.webp 600w,
                      /assets/images/presskit_heroVid_still-800x450.webp 800w,
@@ -62,7 +63,7 @@ import game from '../../../shared/game.json';
         <p class="tagline">{game.tagline}</p>
 
         <!-- Feature chips — replaces the lead paragraph from presskit -->
-        <ul class="hero-chips" id="features">
+        <ul class="hero-chips">
           <li class="hero-chip">
             <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/brush-small-thick.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
             <span>Paint<br>with water</span>
@@ -132,7 +133,7 @@ import game from '../../../shared/game.json';
       <picture>
         <source media="(min-width: 1024px)" srcset="/assets/images/hero1-1200x670.webp">
         <source media="(min-width: 640px)" srcset="/assets/images/hero1-800x450.webp">
-        <img class="image-band__img" src="/assets/images/hero1-600x338.webp" alt="" loading="lazy">
+        <img class="image-band__img" src="/assets/images/hero1-600x338.webp" alt="" width="600" height="338" loading="lazy">
       </picture>
       <div class="image-band__scrim" aria-hidden="true"></div>
       <div class="container image-band__inner">
@@ -180,7 +181,7 @@ import game from '../../../shared/game.json';
               <source media="(max-width: 639px)" srcset="/assets/images/GameMap-mobile-600x338.webp 600w, /assets/images/GameMap-mobile-800x450.webp 800w, /assets/images/GameMap-mobile-1200x675.webp 1200w" sizes="100vw">
               <source media="(min-width: 1024px)" srcset="/assets/images/GameMap-1200x675.webp">
               <source media="(min-width: 640px)" srcset="/assets/images/GameMap-800x450.webp">
-              <img src="/assets/images/GameMap-600x338.webp" alt="The Journey of Letting Go map" loading="lazy">
+              <img src="/assets/images/GameMap-600x338.webp" alt="The Journey of Letting Go map" width="600" height="338" loading="lazy">
             </picture>
             <figcaption>Embark upon The Journey of Letting Go, in the world of Serenity Sketch.</figcaption>
           </figure>
@@ -529,6 +530,9 @@ import game from '../../../shared/game.json';
     .faq-item dd {
       color: var(--c-text-secondary, #6b5e52);
       line-height: 1.65;
+      margin-inline-start: 0;
+      padding-left: 12px;
+      border-left: 4px solid var(--rule);
     }
 
     .faq-item dd a {
