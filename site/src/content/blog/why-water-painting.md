@@ -1,6 +1,6 @@
 ---
 title: "Why water painting? The idea that started everything."
-description: "The ancient Zen practice of painting with water on stone, and how it became the core of Serenity Sketch."
+description: "The centuries-old Chinese practice of water calligraphy, and how it became the core of Serenity Sketch."
 pubDate: 2026-06-23
 author: "Josh Veit"
 category: "Behind the Scenes"
@@ -33,7 +33,7 @@ What's left is just the sensation of the brush. The feeling of your hand moving.
 
 That is the thing I wanted to make.
 
-## The game that grew from it
+## The App that grew from it
 
 Serenity Sketch started as a single experiment: can I recreate that sensation on an iPad? The physics of water spreading on textured stone, the way it catches light for a moment, the quiet of watching it go.
 

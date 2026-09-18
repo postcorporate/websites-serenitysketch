@@ -62,19 +62,32 @@ import game from '../../../shared/game.json';
         </h1>
         <p class="tagline">{game.tagline}</p>
 
+        <p class="platform-note">Coming to {game.platform} · {game.launch}</p>
+
         <!-- Feature chips — replaces the lead paragraph from presskit -->
         <ul class="hero-chips">
-          <li class="hero-chip">
-            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/brush-small-thick.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
-            <span>Paint<br>with water</span>
+          <li>
+            <a class="hero-chip" href="#practice">
+              <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/brush-small-thick.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+              <span>Paint<br>with water</span>
+            </a>
           </li>
-          <li class="hero-chip">
-            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-sanctuary-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
-            <span>Follow<br>a gentle guide</span>
+          <li>
+            <a class="hero-chip" href="#guide">
+              <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-sanctuary-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+              <span>Follow a <br>gentle guide</span>
+            </a>
           </li>
-          <li class="hero-chip">
-            <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-initiation-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
-            <span>Find rest<br>in Letting Go</span>
+          <li>
+            <a class="hero-chip" href="#journey">
+              <span class="hero-chip__icon-wrap"><img src="/assets/images/path-sigils/sigil-path-of-initiation-white-small.png" alt="" width="280" height="280" class="hero-chip__icon"></span>
+              <span>Find rest<br>in Letting Go</span>
+            </a>
+          </li>
+          <li class="hero-chip hero-chip--store">
+            <a class="app-store-badge" href={game.appStoreUrl} target="_blank" rel="noopener noreferrer" aria-label="Pre-order Serenity Sketch on the App Store">
+              <img src="/assets/images/app-store-badge/Pre-order_on_the_App_Store_Badge_US-UK_RGB_blk.svg" alt="Pre-order on the App Store" width="163" height="54">
+            </a>
           </li>
         </ul>
 
@@ -88,17 +101,40 @@ import game from '../../../shared/game.json';
     <section id="about" class="section section-about section-about--no-rule">
       <div class="container about-layout">
         <div class="about-content">
-          <p class="section-eyebrow">About the game</p>
+          <p class="section-eyebrow">About the App</p>
           <h2 class="display">Paint water upon stone. Breathe. Let go.</h2>
           <div class="prose">
-            <p class="lede"><strong>A self-care ritual where each evaporating brushstroke brings freedom and reflection. Inspired by the Zen practice of water painting, you trace water on stone, watch it disappear, and release the need for permanence.</strong></p>
+            <p class="lede"><strong>A self-care ritual where each evaporating brushstroke brings freedom and reflection. Inspired by Zen principles of impermanence and dishu, the Chinese practice of water calligraphy, you trace water on stone, watch it disappear, and release the need for permanence.</strong></p>
             <p>
-              Most self-care apps are serious and <em>in your head</em>. Serenity Sketch is tactile and <em>in your body</em>. Your hand, an Apple Pencil, a stone, and mesmerising, impermanent brushstrokes. You're walked through each Practice by <strong>the Guide</strong>: a warm, unpretentious character who speaks <em>to</em> you, not <em>past</em> you.
+              Most self-care apps are serious and <em>in your head</em>. Serenity Sketch is tactile and <em>in your body</em>. You're walked through each Practice by <strong>the Guide</strong>.
             </p>
           </div>
         </div>
         <div class="about-visual sigil-medallion" aria-hidden="true">
           <img src="/assets/images/path-sigils/sigil-path-of-home-black.png" alt="" width="256" height="256" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         QUOTES
+         ============================================================ -->
+    <section class="section section-quotes-simple">
+      <div class="container">
+        <p class="section-eyebrow">What stays with people</p>
+        <div class="quotes-pair">
+          <figure class="quote-card quote-card--featured">
+            <blockquote>
+              <p>"A space of quiet in an overly stimulating and loud world."</p>
+            </blockquote>
+            <figcaption>Player at Indigo 2025</figcaption>
+          </figure>
+          <figure class="quote-card quote-card--featured">
+            <blockquote>
+              <p>"When I was painting and I realised it was genuinely relaxing me! It's rare for this to be the case with games."</p>
+            </blockquote>
+            <figcaption>Survey respondent</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -146,7 +182,7 @@ import game from '../../../shared/game.json';
          ============================================================ -->
     <section id="features" class="section section-features">
 
-      <article class="pillar">
+      <article class="pillar" id="practice">
         <div class="container pillar-grid">
           <div class="pillar-kicker">
             <span class="pillar-num">01</span>
@@ -154,11 +190,10 @@ import game from '../../../shared/game.json';
           </div>
           <div class="pillar-text">
             <h3 class="pillar-title">Painting with water: simple, timeless</h3>
-            <p>Trace water on stone. Your painting evaporates. No undo. No save. No self-judgment. A practice as old as brushwork, and as quiet as breath.</p>
+            <p>Trace water on stone. Your painting evaporates. No undo. No save. No self-judgment.</p>
           </div>
           <div class="pillar-media">
             <video autoplay muted loop playsinline preload="none"
-              data-lazy-webm="/assets/vids/beach_loop_compressed_960x540_16-9.webm"
               data-lazy-mp4="/assets/vids/beach_loop_compressed_960x540_16-9.mp4"
               poster="/assets/images/Painting_Resonance-600x338.webp"
               aria-label="Painting in a sanctuary setting"></video>
@@ -166,7 +201,7 @@ import game from '../../../shared/game.json';
         </div>
       </article>
 
-      <article class="pillar">
+      <article class="pillar" id="journey">
         <div class="container pillar-grid">
           <div class="pillar-kicker">
             <span class="pillar-num">02</span>
@@ -174,7 +209,7 @@ import game from '../../../shared/game.json';
           </div>
           <div class="pillar-text">
             <h3 class="pillar-title">A guided journey of Letting Go</h3>
-            <p>Your journey begins with the <strong>Path of Initiation</strong> — six guided Practices that introduce the core principles of Letting Go. Each closes with quiet, introspective questions. Complete the Path, face the Trial, and discover how the journey may be changing you.</p>
+            <p>Your journey opens with the <strong>Path of Initiation</strong>: six guided Practices through the core principles of Letting Go. Each closes with quiet, introspective questions. Complete the Path, face the Trial, and discover how it may be changing you.</p>
           </div>
           <figure class="map-figure">
             <picture>
@@ -194,7 +229,7 @@ import game from '../../../shared/game.json';
               </li>
               <li>
                 <img src="/assets/images/path-sigils/sigil-path-of-selftrust-black.png" alt="" width="40" height="40" loading="lazy">
-                <div><strong>Path of Resonance</strong><span>Learning to trust what already lives inside.</span></div>
+                <div><strong>Path of Resonance</strong><span>Listening for what moves you.</span></div>
               </li>
               <li>
                 <img src="/assets/images/path-sigils/sigil-path-of-childplay-black.png" alt="" width="40" height="40" loading="lazy">
@@ -213,7 +248,7 @@ import game from '../../../shared/game.json';
         </div>
       </article>
 
-      <article class="pillar">
+      <article class="pillar" id="guide">
         <div class="container pillar-grid">
           <div class="pillar-kicker">
             <span class="pillar-num">03</span>
@@ -221,7 +256,7 @@ import game from '../../../shared/game.json';
           </div>
           <div class="pillar-text">
             <h3 class="pillar-title">Someone walks with you</h3>
-            <p>A warm, unpretentious voice who invites you to experiment, reflect, and play. The Guide speaks to you, not past you, then gets out of the way once you find your flow.</p>
+            <p>A warm, unpretentious voice who invites you to experiment, reflect, and play, then gets out of the way once you find your flow.</p>
           </div>
           <div class="pillar-media">
             <blockquote class="audio-quote">
@@ -249,30 +284,6 @@ import game from '../../../shared/game.json';
         <p class="pullquote">Letting Go is the reward.</p>
       </div>
     </aside>
-
-    <!-- ============================================================
-         6. QUOTES
-         Two player reactions, simple treatment.
-         ============================================================ -->
-    <section class="section section-quotes-simple">
-      <div class="container">
-        <p class="section-eyebrow">What stays with people</p>
-        <div class="quotes-pair">
-          <figure class="quote-card quote-card--featured">
-            <blockquote>
-              <p>"I went from thinking 'I'm not an artist' to feeling liberated to create!"</p>
-            </blockquote>
-            <figcaption>Player, responding to "how did it make you feel?"</figcaption>
-          </figure>
-          <figure class="quote-card quote-card--featured">
-            <blockquote>
-              <p>"A space of quiet in an overly stimulating and loud world."</p>
-            </blockquote>
-            <figcaption>Player at Indigo 2025</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
 
     <!-- ============================================================
          6. SIGNUP (primary)
@@ -355,12 +366,12 @@ import game from '../../../shared/game.json';
 
           <div class="faq-item">
             <dt>Is this a self-care app, or a game?</dt>
-            <dd>Why not both! It has the structure of a game: a Journey through an abstract world, with immersive environments and sounds. It never demands you to be 'serious', or sit still with your eyes close. It just invites you to slow down and paint.</dd>
+            <dd>Why not both! It has the structure of a game: a Journey through an abstract world, with immersive environments and sounds. It never demands that you sit still in silence. It just invites you to slow down and paint.</dd>
           </div>
 
           <div class="faq-item">
             <dt>Do I need to be able to draw?</dt>
-            <dd>Not at all! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Most players who have tried it go from "I'm not an artist" to "I feel liberated to create."</dd>
+            <dd>Not at all! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Many early players arrive feeling "I'm not an artist", and leave feeling otherwise.</dd>
           </div>
 
           <div class="faq-item">
@@ -380,12 +391,12 @@ import game from '../../../shared/game.json';
 
           <div class="faq-item">
             <dt>Will there be more content after launch?</dt>
-            <dd>We would love to make more Paths! The Path of Initiation introduces you to intersections with other Paths, which we hope will become future content. Whether we do depends entirely on how the game lands. If you want to see more, it helps us immensely if you buy the game, and leave a review in the App Store.</dd>
+            <dd>We would love to make more Paths! The Path of Initiation introduces you to intersections with other Paths, which we hope will become future content. Whether we do depends entirely on how the App lands. If you want to see more, it helps us immensely if you buy the App, and leave a review in the App Store.</dd>
           </div>
 
           <div class="faq-item">
             <dt>When does it launch?</dt>
-            <dd>{game.launch}. Sign up above and we will let you know the day it is out.</dd>
+            <dd>{game.launch}, on iPad. <a href={game.appStoreUrl} target="_blank" rel="noreferrer">Pre-order it on the App Store</a> — the same link works after launch too. Sign up above and we will let you know the day it is out.</dd>
           </div>
 
         </dl>
@@ -418,6 +429,69 @@ import game from '../../../shared/game.json';
     ---------------------------------------------------------------- */
 
 
+
+    .hero-chips {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 23rem;
+      width: 100%;
+    }
+    .hero-chip {
+      height: 3.5rem;
+      flex: none;
+      text-decoration: none;
+      transition: background 160ms var(--ease);
+    }
+    /* Text chips: less chrome around the icon so labels stay 2 lines on mobile */
+    a.hero-chip {
+      padding: 0.5rem 0.65rem 0.5rem 0.4rem;
+      gap: 0.5rem;
+    }
+    a.hero-chip .hero-chip__icon-wrap,
+    a.hero-chip .hero-chip__icon {
+      width: 40px;
+      height: 40px;
+    }
+    a.hero-chip:hover,
+    a.hero-chip:focus-visible {
+      color: var(--paper);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .hero-chip--store {
+      position: relative;
+      justify-content: center;
+      padding: 0;
+      overflow: hidden;
+    }
+    .hero-chip--store::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.55);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .app-store-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      line-height: 0;
+      overflow: hidden;
+    }
+    .app-store-badge img {
+      /* Scale past the capsule so the SVG's own rounded corners
+         get clipped away and the artwork fills edge-to-edge. */
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: fill;
+      display: block;
+      transform: scale(1.13, 1.13);
+      transform-origin: center;
+    }
 
     .beat-media--quote {
       display: flex;
