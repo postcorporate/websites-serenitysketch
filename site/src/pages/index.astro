@@ -152,19 +152,16 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
     </section>
 
     <!-- ============================================================
-         "You are invited" full-bleed image band
+         Tagline band
          ============================================================ -->
-    <section class="image-band" aria-label="Decorative image">
-      <picture>
-        <source media="(min-width: 1024px)" srcset="/assets/images/hero1-1200x670.webp">
-        <source media="(min-width: 640px)" srcset="/assets/images/hero1-800x450.webp">
-        <img class="image-band__img" src="/assets/images/hero1-600x338.webp" alt="" width="600" height="338" loading="lazy">
-      </picture>
-      <div class="image-band__scrim" aria-hidden="true"></div>
-      <div class="container image-band__inner">
-        <p class="image-band__quote">You are invited to explore your creativity by playing with impermanence.</p>
+    <aside class="pullquote-band" aria-label="Tagline">
+      <div class="container pullquote-layout">
+        <div class="pullquote-sigil sigil-medallion sigil-medallion--light" aria-hidden="true">
+          <img src="/assets/images/path-sigils/sigil-path-of-lettinggo-black.png" alt="" width="409" height="409" loading="lazy">
+        </div>
+        <p class="pullquote">Letting Go is the reward.</p>
       </div>
-    </section>
+    </aside>
 
     <!-- ============================================================
          4. FEATURES — pillar layout (shared with presskit)
@@ -261,18 +258,6 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       </article>
 
     </section>
-
-    <!-- ============================================================
-         5. PULLQUOTE BAND
-         ============================================================ -->
-    <aside class="pullquote-band" aria-label="Tagline">
-      <div class="container pullquote-layout">
-        <div class="pullquote-sigil sigil-medallion sigil-medallion--light" aria-hidden="true">
-          <img src="/assets/images/path-sigils/sigil-path-of-lettinggo-black.png" alt="" width="409" height="409" loading="lazy">
-        </div>
-        <p class="pullquote">Letting Go is the reward.</p>
-      </div>
-    </aside>
 
     <!-- ============================================================
          6. SIGNUP (primary)
@@ -392,6 +377,18 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       </div>
     </section>
 
+    <section class="image-band" aria-label="Decorative image">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="/assets/images/hero1-1200x670.webp">
+        <source media="(min-width: 640px)" srcset="/assets/images/hero1-800x450.webp">
+        <img class="image-band__img" src="/assets/images/hero1-600x338.webp" alt="" width="600" height="338" loading="lazy">
+      </picture>
+      <div class="image-band__scrim" aria-hidden="true"></div>
+      <div class="container image-band__inner">
+        <p class="image-band__quote">You are invited to explore your creativity by playing with impermanence.</p>
+      </div>
+    </section>
+
     <!-- ============================================================
          8. BLOG — latest posts, same cards as /blog
          ============================================================ -->
@@ -496,10 +493,23 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
-      margin-top: 2rem;
+      margin-top: 1.25rem;
     }
     @media (max-width: 600px) {
       .quotes-pair { grid-template-columns: 1fr; }
+    }
+
+    /* About → quotes → trailer sit on the same paper plane; keep the
+       stacked section paddings tight so the mid-page doesn't air out. */
+    #about.section-about {
+      padding-bottom: var(--section-y-tight);
+    }
+    .section-quotes-simple {
+      padding-top: var(--section-y-tight);
+      padding-bottom: var(--section-y-tight);
+    }
+    #trailer.section-trailer {
+      padding-top: var(--section-y-tight);
     }
 
     /* Signup sections */
@@ -604,10 +614,6 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
     .faq-item dd a {
       color: inherit;
       text-decoration: underline;
-    }
-
-    .section-blog {
-      border-top: 1px solid var(--rule);
     }
 
     .section-blog .display a {
