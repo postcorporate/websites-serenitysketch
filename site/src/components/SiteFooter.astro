@@ -1,0 +1,21 @@
+---
+import game from '../../../shared/game.json';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-wrap">
+      <p class="footer-brand">
+        © 2026 <a href={game.studioUrl}>{game.developer}</a>
+        ·
+        <a href="/">{game.name}</a>
+      </p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href={game.appStoreUrl} target="_blank" rel="noopener noreferrer">App Store</a>
+        <a href={game.steamUrl} target="_blank" rel="noopener noreferrer">Steam</a>
+        <a href="/presskit">Press kit</a>
+        <a href={`mailto:${game.pressContact}`}>{game.pressContact}</a>
+      </nav>
+    </div>
+  </div>
+</footer>

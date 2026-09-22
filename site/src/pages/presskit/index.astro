@@ -1,30 +1,13 @@
 ---
 import Press from '../../layouts/Press.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
 import game from '../../../../shared/game.json';
 ---
 
 <Press>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="/">
-        <span class="brand-mark"><img src="/assets/images/path-sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
-        <span class="brand-name">{game.name}</span>
-      </a>
-      <nav aria-label="Primary">
-        <ul class="nav-links">
-          <li><a href="#trailer">Trailer</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#quotes">Reactions</a></li>
-          <li><a href="#creators">For Creators</a></li>
-          <li><a href="#downloads">Assets</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader variant="press" />
 
   <main id="main">
 
@@ -498,7 +481,7 @@ import game from '../../../../shared/game.json';
   <footer class="site-footer">
     <div class="container">
       <div class="footer-wrap">
-        <p class="footer-brand">© 2026 {game.developer} · {game.name}</p>
+        <p class="footer-brand">© 2026 <a href={game.studioUrl}>{game.developer}</a> · <a href="/">{game.name}</a></p>
         <p class="footer-note">Last updated {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
       </div>
       <p class="legal-attribution">

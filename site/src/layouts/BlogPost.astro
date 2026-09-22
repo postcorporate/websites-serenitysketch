@@ -1,105 +1,99 @@
 ---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import game from '../../../shared/game.json';
+import BlogShell from './BlogShell.astro';
+import { categoryHref, formatBlogDate, studioHref } from '../lib/blog';
 
 export interface Props {
   title: string;
+  metaTitle?: string;
   description: string;
   pubDate: Date;
   author?: string;
   category?: string;
-  heroImage?: string;
+  heroImage?: ImageMetadata;
+  heroImageAlt?: string;
+  slug: string;
+  relatedPosts?: { slug: string; title: string }[];
 }
 
 const {
   title,
+  metaTitle,
   description,
   pubDate,
   author = 'Josh Veit',
   category,
   heroImage,
+  heroImageAlt,
+  slug,
+  relatedPosts = [],
 } = Astro.props;
 
-const formattedDate = pubDate.toLocaleDateString('en-GB', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const formattedDate = formatBlogDate(pubDate);
+const studioUrl = studioHref(slug);
+const categoryUrl = category ? categoryHref(category) : '/blog';
 
-const ogImage = heroImage ?? '/assets/images/hero1-1200x670.webp';
+const ogImageSrc = heroImage
+  ? (await getImage({ src: heroImage, width: 1200, height: 675 })).src
+  : '/assets/images/hero1-1200x670.webp';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  mainEntityOfPage: `https://serenitysketch.com/blog/${slug}`,
+  image: `https://serenitysketch.com${ogImageSrc}`,
+  author: {
+    '@type': 'Person',
+    name: author,
+    url: game.studioUrl,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: game.developer,
+    url: game.studioUrl,
+  },
+};
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content={description}>
-  <meta property="og:title" content={`${title} — ${game.name}`}>
-  <meta property="og:description" content={description}>
-  <meta property="og:image" content={`https://serenitysketch.com${ogImage}`}>
-  <meta property="og:type" content="article">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="/assets/images/path-sigils/sigil-path-of-initiation-black.png">
-  <title>{title} — {game.name}</title>
-  <link rel="preload" href="/assets/fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles/fonts.css">
-  <link rel="stylesheet" href="/styles/main.css">
-  <style is:global>
-    :root {
-      --color-bg:         var(--paper);
-      --color-text:       var(--ink);
-      --color-text-muted: var(--ink-soft);
-      --color-accent:     var(--copper);
-      --color-accent-dark:var(--copper-deep);
-      --color-border:     var(--rule);
-    }
-    html { scroll-behavior: smooth; }
-    /* Blog pages have no hero video — header is always opaque */
-    .site-header {
-      background: rgba(246, 239, 227, 0.95) !important;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: var(--rule) !important;
-    }
-  </style>
-</head>
-<body>
-
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="/">
-        <span class="brand-mark"><img src="/assets/images/path-sigils/sigil-path-of-initiation-black.png" alt="" width="20" height="20" class="brand-icon"></span>
-        <span class="brand-name">{game.name}</span>
-      </a>
-      <nav aria-label="Primary">
-        <ul class="nav-links">
-          <li><a href="/#about">About</a></li>
-          <li><a href="/#signup">Sign up</a></li>
-          <li><a href="/blog" aria-current="page">Blog</a></li>
-          <li><a href="/presskit">Press kit</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<BlogShell
+  title={`${metaTitle ?? title} — ${game.name}`}
+  ogTitle={`${title} — ${game.name}`}
+  description={description}
+  ogImage={ogImageSrc}
+  ogType="article"
+  canonical={`https://serenitysketch.com/blog/${slug}`}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <main id="main">
     <article class="blog-post">
 
       <header class="blog-post__header">
-        <div class="container blog-post__header-inner">
-          {category && <p class="section-eyebrow">{category}</p>}
-          <h1 class="blog-post__title">{title}</h1>
-          <p class="blog-post__meta">
-            <time datetime={pubDate.toISOString()}>{formattedDate}</time>
-            {author && <span class="blog-post__author"> · {author}</span>}
-          </p>
+        <div class="container">
+          <div class="blog-post__header-inner">
+            {category && (
+              <p class="section-eyebrow">
+                <a href={categoryUrl}>{category}</a>
+              </p>
+            )}
+            <h1 class="blog-post__title">{title}</h1>
+            <p class="blog-post__meta">
+              <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+              {author && <span class="blog-post__author"> · {author}</span>}
+            </p>
+          </div>
         </div>
       </header>
 
       {heroImage && (
         <div class="blog-post__hero">
           <div class="container">
-            <img src={heroImage} alt="" class="blog-post__hero-img" loading="eager">
+            <Image src={heroImage} alt={heroImageAlt ?? title} class="blog-post__hero-img" loading="eager" />
           </div>
         </div>
       )}
@@ -109,7 +103,28 @@ const ogImage = heroImage ?? '/assets/images/hero1-1200x670.webp';
           <slot />
         </div>
 
+        <aside class="blog-post__about">
+          <p class="section-eyebrow">About the author</p>
+          <p>
+            <a href={studioUrl} rel="author"><strong>{author}</strong></a> is an interdisciplinary artist, and founder of <a href={studioUrl}>Copper Coin</a>, an independent game studio in the Netherlands. At age 35 he left a career in finance to re-discover his creative side. Now Copper Coin makes “games for the second half of life.” <a href={studioUrl}>Visit the studio.</a>
+          </p>
+        </aside>
+
         <footer class="blog-post__footer">
+          {relatedPosts.length > 0 && category && (
+            <nav class="blog-post__related" aria-label={`More in ${category}`}>
+              <p class="section-eyebrow">
+                <a href={categoryUrl}>More in {category}</a>
+              </p>
+              <ul>
+                {relatedPosts.map((related) => (
+                  <li>
+                    <a href={`/blog/${related.slug}`}>{related.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
           <a href="/blog" class="blog-back-link">← All posts</a>
         </footer>
       </div>
@@ -117,114 +132,261 @@ const ogImage = heroImage ?? '/assets/images/hero1-1200x670.webp';
     </article>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-wrap">
-        <p class="footer-brand">© 2026 <a href={game.studioUrl}>{game.developer}</a> · {game.name}</p>
-        <nav class="footer-links" aria-label="Footer">
-          <a href="/blog">Blog</a>
-          <a href="/presskit">Press kit</a>
-          <a href={`mailto:${game.pressContact}`}>{game.pressContact}</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
-
   <style>
     .blog-post__header {
-      padding: clamp(3rem, 6vw, 5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
-      border-bottom: 1px solid var(--rule);
+      padding: clamp(1.1rem, 2vw, 1.6rem) 0 0;
+      text-align: left;
     }
 
     .blog-post__header-inner {
       max-width: 720px;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .blog-post__header .section-eyebrow {
+      margin-bottom: 0.4rem;
     }
 
     .blog-post__title {
       font-family: var(--serif);
-      font-size: clamp(1.75rem, 4vw, 3rem);
-      font-weight: 300;
-      line-height: 1.2;
-      color: var(--ink);
-      margin-bottom: 1rem;
+      font-weight: 500;
+      color: var(--copper);
+      font-style: normal;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin: 0 0 0.4rem;
+      font-size: clamp(2rem, 4.4vw, 3.2rem);
+      text-align: left;
+    }
+
+    .blog-post__header .section-eyebrow a,
+    .blog-post__related .section-eyebrow a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .blog-post__header .section-eyebrow a:hover,
+    .blog-post__related .section-eyebrow a:hover {
+      text-decoration: underline;
     }
 
     .blog-post__meta {
       font-size: 0.875rem;
-      color: var(--ink-soft);
+      color: var(--ink-faint);
+      margin: 0;
+      text-align: left;
     }
 
     .blog-post__author {
-      color: var(--ink-soft);
+      color: var(--ink-faint);
     }
 
     .blog-post__hero {
-      padding: 2rem 0;
+      padding: 1rem 0 0;
     }
 
     .blog-post__hero-img {
       width: 100%;
+      max-width: 720px;
       border-radius: var(--radius, 8px);
       display: block;
     }
 
     .blog-post__body {
       max-width: 720px;
-      padding: clamp(2rem, 4vw, 3.5rem) 0;
+      padding: 1.35rem 0 clamp(2rem, 4vw, 3.5rem);
       line-height: 1.75;
       color: var(--ink);
       text-align: left;
+      display: flow-root;
     }
 
-    .blog-post__body h2 {
+    .blog-post__body :global(.pull-quote) {
+      margin: 0.35rem 0 1.35rem;
+      padding: 0.85rem 1rem 1rem;
+      background: var(--paper-soft);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+    }
+
+    .blog-post__body :global(.pull-quote)::before {
+      content: "“";
+      display: block;
+      margin-bottom: 0.35rem;
       font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 400;
+      font-size: 2.6rem;
+      line-height: 0.7;
+      color: var(--gold);
+    }
+
+    .blog-post__body :global(.pull-quote p) {
+      margin: 0;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--copper);
+      font-size: 1.15rem;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    .blog-post__body :global(.pull-quote cite) {
+      display: block;
+      margin-top: 0.7rem;
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    @media (min-width: 640px) {
+      .blog-post__body :global(.pull-quote) {
+        float: right;
+        width: min(16.5rem, 46%);
+        margin: 0.15rem 0 0.85rem 1.4rem;
+      }
+    }
+
+    .blog-post__body :global(h2) {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -0.005em;
+      line-height: 1.15;
+      color: var(--copper);
       margin: 2.5rem 0 0.75rem;
     }
 
-    .blog-post__body h3 {
+    .blog-post__body :global(h3) {
       font-family: var(--serif);
       font-size: 1.25rem;
-      font-weight: 400;
+      font-weight: 500;
+      color: var(--ink);
       margin: 2rem 0 0.5rem;
     }
 
-    .blog-post__body p {
+    .blog-post__body :global(p) {
       margin-bottom: 1.25rem;
     }
 
-    .blog-post__body a {
+    .blog-post__body :global(a) {
       color: var(--copper-deep, var(--copper));
       text-decoration: underline;
     }
 
-    .blog-post__body blockquote {
-      border-left: 3px solid var(--copper);
-      margin: 2rem 0;
-      padding: 0.5rem 0 0.5rem 1.5rem;
+    .blog-post__body :global(blockquote) {
+      margin: 1.75rem 0;
+      padding: clamp(1.15rem, 2.4vw, 1.8rem) 1.4rem;
+      background: var(--ink);
+      color: var(--paper);
+      border: 0;
+      border-radius: var(--radius);
+      font-family: var(--serif);
       font-style: italic;
-      color: var(--ink-soft);
+      font-size: clamp(1.05rem, 2vw, 1.5rem);
+      line-height: 1.35;
+      text-align: left;
     }
 
-    .blog-post__body img {
+    .blog-post__body :global(blockquote p) {
+      margin: 0;
+      color: var(--paper);
+    }
+
+    .blog-post__body :global(blockquote p + p) {
+      margin-top: 0.75rem;
+    }
+
+    .blog-post__body :global(blockquote cite) {
+      display: block;
+      margin-top: 0.7rem;
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .blog-post__body :global(img) {
       max-width: 100%;
       border-radius: var(--radius, 8px);
     }
 
-    .blog-post__body ul,
-    .blog-post__body ol {
+    .blog-post__body :global(ul),
+    .blog-post__body :global(ol) {
       padding-left: 1.5rem;
       margin-bottom: 1.25rem;
     }
 
-    .blog-post__body li {
+    .blog-post__body :global(li) {
       margin-bottom: 0.4rem;
+    }
+
+    .blog-post__about {
+      max-width: 720px;
+      margin: 0 0 2rem;
+      padding: 1.6rem 1.8rem;
+      background: var(--paper-soft);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-lg);
+    }
+
+    .blog-post__about .section-eyebrow {
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-post__about p {
+      margin: 0 0 0.85rem;
+      color: var(--ink-soft);
+    }
+
+    .blog-post__about p:last-child {
+      margin-bottom: 0;
+    }
+
+    .blog-post__about a {
+      color: var(--copper-deep);
     }
 
     .blog-post__footer {
       padding: 2rem 0 3rem;
       border-top: 1px solid var(--rule);
+      max-width: 720px;
+    }
+
+    .blog-post__related {
+      margin-bottom: 1.75rem;
+    }
+
+    .blog-post__related ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .blog-post__related li {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .blog-post__related li:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .blog-post__related a {
+      display: block;
+      padding: 0.85rem 0;
+      font-family: var(--serif);
+      font-size: 1.125rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .blog-post__related a:hover {
+      color: var(--copper-deep);
     }
 
     .blog-back-link {
@@ -237,20 +399,6 @@ const ogImage = heroImage ?? '/assets/images/hero1-1200x670.webp';
     .blog-back-link:hover {
       text-decoration: underline;
     }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      color: inherit;
-      text-decoration: none;
-      opacity: 0.65;
-      font-size: 0.875rem;
-    }
-    .footer-links a:hover { opacity: 1; }
   </style>
 
-</body>
-</html>
+</BlogShell>

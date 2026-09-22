@@ -1,0 +1,77 @@
+---
+import game from '../../../../../shared/game.json';
+import BlogShell from '../../../layouts/BlogShell.astro';
+import PostList from '../../../components/PostList.astro';
+import {
+  BLOG_CATEGORIES,
+  CATEGORY_LEADS,
+  categorySlug,
+  getPublishedPosts,
+} from '../../../lib/blog';
+import type { BlogCategory } from '../../../lib/blog';
+
+export async function getStaticPaths() {
+  return BLOG_CATEGORIES.map((category) => ({
+    params: { category: categorySlug(category) },
+    props: { category },
+  }));
+}
+
+interface Props {
+  category: BlogCategory;
+}
+
+const { category } = Astro.props;
+const lead = CATEGORY_LEADS[category];
+const posts = (await getPublishedPosts()).filter((post) => post.data.category === category);
+---
+
+<BlogShell
+  title={`${category} — ${game.name}`}
+  description={lead}
+  canonical={`https://serenitysketch.com/blog/category/${categorySlug(category)}`}
+>
+  <main id="main">
+    <section class="blog-index-header">
+      <div class="container">
+        <p class="section-eyebrow"><a href="/blog">Blog</a></p>
+        <h1 class="display">{category}</h1>
+        <p class="blog-index-lead">{lead}</p>
+      </div>
+    </section>
+
+    <section class="blog-index-list">
+      <div class="container">
+        <PostList posts={posts} emptyText="No posts in this category yet." />
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .blog-index-header {
+      padding: clamp(3rem, 6vw, 5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+      border-bottom: 1px solid var(--rule);
+      text-align: left;
+    }
+
+    .blog-index-header .section-eyebrow a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .blog-index-header .section-eyebrow a:hover {
+      text-decoration: underline;
+    }
+
+    .blog-index-lead {
+      color: var(--ink-soft);
+      font-size: 1.0625rem;
+      margin-top: 0.75rem;
+      max-width: 520px;
+    }
+
+    .blog-index-list {
+      padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(3rem, 6vw, 5rem);
+    }
+  </style>
+</BlogShell>

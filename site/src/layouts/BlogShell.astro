@@ -1,0 +1,63 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  ogTitle = title,
+  ogImage = '/assets/images/hero1-1200x670.webp',
+  ogType = 'website',
+  canonical,
+} = Astro.props;
+
+const ogImageUrl = ogImage.startsWith('http')
+  ? ogImage
+  : `https://serenitysketch.com${ogImage}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content={description}>
+  {canonical && <link rel="canonical" href={canonical}>}
+  <meta property="og:title" content={ogTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImageUrl}>
+  <meta property="og:type" content={ogType}>
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="/assets/images/path-sigils/sigil-path-of-initiation-black.png">
+  <title>{title}</title>
+  <link rel="preload" href="/assets/fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles/fonts.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <slot name="head" />
+  <style is:global>
+    :root {
+      --color-bg:         var(--paper);
+      --color-text:       var(--ink);
+      --color-text-muted: var(--ink-soft);
+      --color-accent:     var(--copper);
+      --color-accent-dark:var(--copper-deep);
+      --color-border:     var(--rule);
+    }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body>
+  <SiteHeader variant="blog" solid />
+  <slot />
+  <SiteFooter />
+</body>
+</html>

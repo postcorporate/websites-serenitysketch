@@ -1,0 +1,77 @@
+---
+import game from '../../../shared/game.json';
+
+export type HeaderVariant = 'home' | 'blog' | 'press';
+
+interface NavLink {
+  href: string;
+  label: string;
+  external?: boolean;
+}
+
+interface Props {
+  variant?: HeaderVariant;
+  /** Opaque header for pages without a hero video (blog). */
+  solid?: boolean;
+}
+
+const { variant = 'home', solid = false } = Astro.props;
+
+const navByVariant: Record<HeaderVariant, NavLink[]> = {
+  home: [
+    { href: '#trailer', label: 'Trailer' },
+    { href: '#about', label: 'About' },
+    { href: '#features', label: 'Features' },
+    { href: '#signup', label: 'Sign up' },
+    { href: '/presskit', label: 'Press kit' },
+    { href: '/blog', label: 'Blog' },
+  ],
+  blog: [
+    { href: '/#about', label: 'About' },
+    { href: '/#signup', label: 'Sign up' },
+    { href: game.appStoreUrl, label: 'Download', external: true },
+    { href: '/presskit', label: 'Press kit' },
+  ],
+  press: [
+    { href: '#trailer', label: 'Trailer' },
+    { href: '#about', label: 'About' },
+    { href: '#features', label: 'Features' },
+    { href: '#quotes', label: 'Reactions' },
+    { href: '#creators', label: 'For Creators' },
+    { href: '#downloads', label: 'Assets' },
+    { href: '#contact', label: 'Contact' },
+  ],
+};
+
+const links = navByVariant[variant];
+---
+
+<header class:list={['site-header', solid && 'site-header--solid']}>
+  <div class="container nav-wrap">
+    <a class="brand" href="/">
+      <span class="brand-mark">
+        <img
+          src="/assets/images/path-sigils/sigil-path-of-initiation-black.png"
+          alt=""
+          width="20"
+          height="20"
+          class="brand-icon"
+        >
+      </span>
+      <span class="brand-name">{game.name}</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        {links.map((link) => (
+          <li>
+            {link.external ? (
+              <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+            ) : (
+              <a href={link.href}>{link.label}</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
