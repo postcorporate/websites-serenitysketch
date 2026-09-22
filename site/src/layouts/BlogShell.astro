@@ -1,4 +1,6 @@
 ---
+import GtmHead from '../components/GtmHead.astro';
+import GtmBody from '../components/GtmBody.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
@@ -28,6 +30,7 @@ const ogImageUrl = ogImage.startsWith('http')
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <GtmHead />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content={description}>
@@ -56,6 +59,7 @@ const ogImageUrl = ogImage.startsWith('http')
   </style>
 </head>
 <body>
+  <GtmBody />
   <SiteHeader variant="blog" solid />
   <slot />
   <SiteFooter />
