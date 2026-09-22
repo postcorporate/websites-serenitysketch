@@ -1,7 +1,7 @@
 ---
 title: "What Outer Wilds Means to Me"
 description: "WIP post: How the video game Outer Wilds captures my journey between belief and doubt. Full post is still being written."
-pubDate: 2026-20-09
+pubDate: 2026-09-20
 category: "Inspirations"
 tags: ["outer wilds", "faith and doubt", "nonlinear storytelling"]
 heroImage: "./OuterWilds-1200x675.webp"

@@ -1,7 +1,7 @@
 ---
 title: "Career Pause - Clearing the Slate"
 description: "WIP post: I hit Pause on my career, to re-orient. It led me to making video games and Serenity Sketch. Full post is still being written."
-pubDate: 2026-18-09
+pubDate: 2026-09-15
 category: "Founder's Path"
 tags: ["meditation", "creative process", "leaving finance"]
 heroImage: "./Painting_Lineage-1200x675.webp"
