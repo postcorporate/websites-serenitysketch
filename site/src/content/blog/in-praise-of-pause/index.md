@@ -18,13 +18,13 @@ The striving served me well! I had the lucky concoction of a stable family life,
 
 There is no "and then it all fell apart" to this life arc. What did happen, however, is that as the stakes kept rising, and the years of pulling wore on me, there were moments I felt lopsided as a person. But I could mostly ignore them. The pressure of the present never let up...and if I'm honest I liked it.
 
-My tipping point came, believe it or not, while playing a computer game called [*Outer Wilds*](https://www.mobiusdigitalgames.com/outer-wilds.html).
+My tipping point came, believe it or not, while playing a sci-fi computer game called [*Outer Wilds*](https://www.mobiusdigitalgames.com/outer-wilds.html).
 
 *spoiler alert for the game - don't read on if you're thinking of playing*
 
-In *Outer Wilds*, a nomadic alien species named the Nomai spent their existence chasing messages from some higher cosmic power. They called it The Eye of the Universe, and they thought it was trying to talk with them. The Eye would twinkle cryptically in some far-off star system, and they'd race over to pin it down. But it would wink out before they arrived, only to reappear at the far edge of the universe. And off they'd chase again.
+In *Outer Wilds*, a nomadic alien species named the *Nomai* travel the stars in pursuit of some 'higher cosmic power.' They called this thing The Eye of the Universe, and they thought it was trying to communicate with them. The Eye would twinkle cryptically in some far-off star system, and they'd race over on their space ship to pin it down. But The Eye would wink out before they arrived, only to reappear at the far edge of the universe. And off they'd chase again.
 
-In the middle of all that chasing, one tribe of Nomai gets stranded in our solar system. Their ships are marooned, so they must spend *generations* rebuilding their technology stack, just to regain the ability to travel between stars.
+In the middle of all that space-faring, one tribe of *Nomai* becomes stranded in the player's solar system. Their ships are marooned, so they must spend *generations* rebuilding their technology stack, just to regain the ability to travel between stars.
 
 They have to stand still for a few hundred years (!)
 
