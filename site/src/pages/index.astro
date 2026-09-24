@@ -10,6 +10,76 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
 ---
 
 <Main>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who is making this?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Serenity Sketch is made by Copper Coin (${game.studioUrl}), a solo indie studio in the Netherlands, founded by Joshua Veit with a trusted circle of freelance collaborators for art, music, programming, and voice.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a self-care app, or a game?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Why not both! It has the structure of a game: a Journey through an abstract world, with immersive environments and sounds. It never demands that you sit still in silence. It just invites you to slow down and paint."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to be able to draw?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not at all! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Many early players arrive feeling \"I'm not an artist\", and leave feeling otherwise."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I've never played a video game?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We designed Serenity Sketch to be approachable and intuitive. No gaming experience required!"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play for free? How much does it cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The first two Practices are free. To unlock the rest, it is a one-time payment of \u20ac4.99 (or your local currency equivalent). That gets you the full Path of Initiation, the Trial of Initiation, and your Home Sanctuary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What device do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An iPad, with Apple Pencil or your finger. We are exploring other platforms for future releases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will there be more content after launch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We would love to make more Paths! The Path of Initiation introduces you to intersections with other Paths, which we hope will become future content. Whether we do depends entirely on how the App lands. If you want to see more, it helps us immensely if you buy the App, and leave a review in the App Store."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When does it launch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${game.launch}, on iPad. Pre-order it on the App Store \u2014 the same link works after launch too. Sign up above and we will let you know the day it is out.`
+        }
+      }
+    ]
+  })} />
 
   <SiteHeader variant="home" />
 
@@ -39,13 +109,15 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       <div class="container hero-copy">
         <p class="eyebrow">&nbsp;</p>
         <h1 class="hero-logo">
+          <span class="visually-hidden">{game.name} — {game.tagline}</span>
           <img
             src="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp"
             srcset="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-small-320x151.webp 320w,
                     /assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp 640w,
                     /assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-large-1280x605.webp 1280w"
             sizes="(max-width: 600px) 240px, 400px"
-            alt={game.name}
+            alt=""
+            aria-hidden="true"
             width="640" height="302"
             loading="eager" fetchpriority="high">
         </h1>

@@ -16,15 +16,15 @@
   "platform": "iPad",
   "platformNote": "Apple Pencil or Touch",
   "launch": "October 6, 2026",
-  "price": "Free to start · €4.99 / $4.99 to unlock",
-  "pricingNote": "First 2 Practices are free, no account required. Unlock the full Path of Initiation (8 Practices + Trial) for €4.99 (or $4.99 USD).",
+  "price": "Free to start \u00b7 \u20ac4.99 / $4.99 to unlock",
+  "pricingNote": "First 2 Practices are free, no account required. Unlock the full Path of Initiation (8 Practices + Trial) for \u20ac4.99 (or $4.99 USD).",
   "website": "https://serenitysketch.com",
   "pressKitUrl": "https://press.serenitysketch.com",
   "pressContact": "josh@coppercoin.nl",
   "steamUrl": "https://store.steampowered.com/app/4148470/Serenity_Sketch/",
   "appStoreUrl": "https://apps.apple.com/us/app/serenity-sketch/id6754323337?itscg=30200&itsct=apps_box_link&mttnsubad=6754323337&ct=website",
   "trailerYoutubeId": "b32JXo8g6tw",
-  "trailerYoutubeTitle": "Serenity Sketch — Teaser Trailer",
+  "trailerYoutubeTitle": "Serenity Sketch \u2014 Teaser Trailer",
   "team": [
     {
       "role": "Project Lead and Designer",
@@ -66,5 +66,11 @@
       "name": "Jemima Johanna",
       "url": "https://www.jemimajohanna.com/"
     }
-  ]
+  ],
+  "socialLinks": {
+    "instagram": "https://www.instagram.com/serenity_sketch_game/",
+    "facebook": "https://www.facebook.com/serenitysketch",
+    "itch": "https://meditativegames.itch.io/serenitysketch"
+  },
+  "appStoreId": "6754323337"
 }

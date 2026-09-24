@@ -29,7 +29,7 @@ const posts = (await getPublishedPosts()).filter((post) => post.data.category ==
 <BlogShell
   title={`${category} — ${game.name}`}
   description={lead}
-  canonical={`https://serenitysketch.com/blog/category/${categorySlug(category)}`}
+  canonical={`https://serenitysketch.com/blog/category/${categorySlug(category)}/`}
 >
   <main id="main">
     <section class="blog-index-header">

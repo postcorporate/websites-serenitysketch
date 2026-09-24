@@ -1,6 +1,7 @@
 ---
 import GtmHead from '../components/GtmHead.astro';
 import GtmBody from '../components/GtmBody.astro';
+import game from '../../../shared/game.json';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
@@ -40,6 +41,7 @@ const ogImageUrl = ogImage.startsWith('http')
   <meta property="og:image" content={ogImageUrl}>
   <meta property="og:type" content={ogType}>
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="apple-itunes-app" content={`app-id=${game.appStoreId}`}>
   <link rel="icon" type="image/png" href="/assets/images/path-sigils/sigil-path-of-initiation-black.png">
   <title>{title}</title>
   <link rel="preload" href="/assets/fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin>

@@ -45,7 +45,7 @@ const jsonLd = {
   headline: title,
   description,
   datePublished: pubDate.toISOString(),
-  mainEntityOfPage: `https://serenitysketch.com/blog/${slug}`,
+  mainEntityOfPage: `https://serenitysketch.com/blog/${slug}/`,
   image: `https://serenitysketch.com${ogImageSrc}`,
   author: {
     '@type': 'Person',
@@ -66,7 +66,7 @@ const jsonLd = {
   description={description}
   ogImage={ogImageSrc}
   ogType="article"
-  canonical={`https://serenitysketch.com/blog/${slug}`}
+  canonical={`https://serenitysketch.com/blog/${slug}/`}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 

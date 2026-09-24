@@ -14,6 +14,9 @@ const {
   description = `${game.tagline} Press kit for content creators and press.`,
   ogImage = '/assets/images/hero1-1200x670.webp',
 } = Astro.props;
+
+const isPreLaunch = new Date() < new Date(game.launch);
+const sameAsLinks = [game.appStoreUrl, game.steamUrl, game.socialLinks?.itch, game.socialLinks?.instagram, game.socialLinks?.facebook].filter(Boolean);
 ---
 
 <!DOCTYPE html>
@@ -29,6 +32,8 @@ const {
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://serenitysketch.com/presskit">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://serenitysketch.com/presskit/">
+  <meta name="apple-itunes-app" content={`app-id=${game.appStoreId}`}>
   <link rel="icon" type="image/png" href="/assets/images/path-sigils/sigil-path-of-initiation-black.png">
   <title>{title}</title>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
@@ -39,17 +44,25 @@ const {
 
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "VideoGame",
+    "@type": ["VideoGame", "MobileApplication"],
     "name": game.name,
     "description": game.longDescription,
     "url": game.website,
     "gamePlatform": game.platform,
     "operatingSystem": "iPadOS",
     "applicationCategory": "HealthApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "EUR",
+      "availability": isPreLaunch ? "https://schema.org/PreOrder" : "https://schema.org/InStock",
+      "url": game.appStoreUrl
+    },
     "author": {
       "@type": "Organization",
       "name": game.developer,
-      "url": game.studioUrl
+      "url": game.studioUrl,
+      "sameAs": sameAsLinks
     }
   })} />
 </head>

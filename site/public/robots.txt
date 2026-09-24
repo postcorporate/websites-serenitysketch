@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://serenitysketch.com/sitemap-index.xml
