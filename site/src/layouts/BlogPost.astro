@@ -250,6 +250,23 @@ const jsonLd = {
       }
     }
 
+    /* Small inline GIF/image that text wraps around, like the pull quote.
+       Usage in markdown: <img class="inline-gif" src="/assets/images/x.gif" alt="..." /> */
+    .blog-post__body :global(.inline-gif) {
+      display: block;
+      width: min(14rem, 70%);
+      height: auto;
+      margin: 0 auto 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .blog-post__body :global(.inline-gif) {
+        float: right;
+        width: min(13rem, 40%);
+        margin: 0.3rem 0 0.85rem 1.4rem;
+      }
+    }
+
     .blog-post__body :global(h2) {
       font-family: var(--serif);
       font-weight: 500;

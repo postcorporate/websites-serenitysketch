@@ -40,7 +40,7 @@ Fast-forward a few years, and I've reoriented my striving toward making video ga
 
 **I make games that create that moment of pause and re-evaluation**, like *Outer Wilds* did for me.
 
-[Serenity Sketch](https://serenitysketch.com/) is my first game (or "app" if you're put off the word game). It's a guided Practice of pausing. In it, you take ten minutes to paint with water on a digital stone. And then let go as your creation gently evaporates.
+*[Serenity Sketch](https://serenitysketch.com/)* is my first game (or "app" if you're put off the word game). It's a guided Practice of pausing. In it, you take ten minutes to paint with water on a digital stone. And then let go as your creation gently evaporates.
 
 [^1]: There's a ton more to say about Outer Wilds and its meaning to me, so I'm linking to [a future post on this topic](/blog/what-outer-wilds-means-to-me).
 [^2]: [More specifics](/blog/clearing-the-slate) on how I career-puased, took a deep breath, and then found my way into video games
@@ -48,4 +48,4 @@ Fast-forward a few years, and I've reoriented my striving toward making video ga
 
 ---
 
-Serenity Sketch launches on iPad October 6, 2026. [Pre-order it now →](https://apps.apple.com/us/app/serenity-sketch/id6754323337?itscg=30200&itsct=apps_box_link&mttnsubad=6754323337)
+*Serenity Sketch* launches on iPad October 6, 2026. [Pre-order it now →](https://apps.apple.com/us/app/serenity-sketch/id6754323337?itscg=30200&itsct=apps_box_link&mttnsubad=6754323337)
