@@ -75,7 +75,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
         "name": "When does it launch?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `${game.launch}, on iPad. Pre-order it on the App Store \u2014 the same link works after launch too. Sign up above and we will let you know the day it is out.`
+          "text": `${game.launch}, on iPad. Get it on the App Store \u2014 download now and start playing. Sign up above to stay updated on new content and releases.`
         }
       }
     ]
@@ -123,7 +123,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
         </h1>
         <p class="tagline">{game.tagline}</p>
 
-        <p class="platform-note">Coming to {game.platform} · {game.launch}</p>
+        <p class="platform-note">Available now on {game.platform}</p>
 
         <!-- Feature chips — replaces the lead paragraph from presskit -->
         <ul class="hero-chips">
@@ -146,8 +146,8 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
             </a>
           </li>
           <li class="hero-chip hero-chip--store">
-            <a class="app-store-badge" href={game.appStoreUrl} target="_blank" rel="noopener noreferrer" aria-label="Pre-order Serenity Sketch on the App Store">
-              <img src="/assets/images/app-store-badge/Pre-order_on_the_App_Store_Badge_US-UK_RGB_blk.svg" alt="Pre-order on the App Store" width="163" height="54">
+            <a class="app-store-badge" href={game.appStoreUrl} target="_blank" rel="noopener noreferrer" aria-label="Download Serenity Sketch on the App Store">
+              <img src="/assets/images/app-store-badge/Download_on_the_App_Store_Badge_US-UK_RGB_blk.svg" alt="Download on the App Store" width="163" height="54">
             </a>
           </li>
         </ul>
@@ -338,7 +338,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
     <section id="signup" class="section section-signup">
       <div class="container signup-inner">
         <h2 class="signup-heading">Stay in the loop.</h2>
-        <p class="signup-sub">Subscribe to our newsletter, for launch announcements, updates, and early access.</p>
+        <p class="signup-sub">Subscribe to our newsletter for updates, new content releases, and behind-the-scenes stories.</p>
 
         <script is:inline>
           (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
@@ -442,7 +442,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
 
           <div class="faq-item">
             <dt>When does it launch?</dt>
-            <dd>{game.launch}, on iPad. <a href={game.appStoreUrl} target="_blank" rel="noreferrer">Pre-order it on the App Store</a> — the same link works after launch too. Sign up above and we will let you know the day it is out.</dd>
+            <dd>{game.launch}, on iPad. <a href={game.appStoreUrl} target="_blank" rel="noreferrer">Get it on the App Store</a> — download now and start playing. Sign up above to stay updated on new content and releases.</dd>
           </div>
 
         </dl>

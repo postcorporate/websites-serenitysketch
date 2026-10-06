@@ -28,7 +28,7 @@ import game from '../../../../shared/game.json';
       </video>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="container hero-copy">
-        <p class="eyebrow">Press Kit · {game.launch}</p>
+        <p class="eyebrow">Press Kit</p>
         <h1 class="hero-logo">
           <img
             src="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp"
@@ -471,7 +471,7 @@ import game from '../../../../shared/game.json';
         <ul class="contact-list">
           <li><span>Press &amp; creators</span><a href={`mailto:${game.pressContact}`}>{game.pressContact}</a></li>
           <li><span>Studio site</span><a href={game.studioUrl} target="_blank" rel="noreferrer">{game.studioUrl.replace('https://', '')}</a></li>
-          <li><span>Apple App Store</span>{game.appStoreUrl ? <a href={game.appStoreUrl} target="_blank" rel="noreferrer">Pre-order now</a> : <span class="contact-pending">Link coming soon</span>}</li>
+          <li><span>Apple App Store</span>{game.appStoreUrl ? <a href={game.appStoreUrl} target="_blank" rel="noreferrer">Download now</a> : <span class="contact-pending">Link coming soon</span>}</li>
           <li><span>Steam (coming 2027)</span><a href={game.steamUrl} target="_blank" rel="noreferrer">wishlist link</a></li>
         </ul>
       </div>
