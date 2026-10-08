@@ -9,7 +9,7 @@ heroImageAlt: "The words \"Why make this?\" hand-lettered over a sketched, water
 draft: false
 ---
 
-*Serenity Sketch* exists because I needed it first: a way to slow down, make something with my hands, and let it go.
+In short, *Serenity Sketch* exists because I needed it first: a way to slow down, make something with my hands, and let it go.
 
 Our Lead Designer, Meggy Pepelanova, had been nudging me for a while to write the long version. So here it is.
 
