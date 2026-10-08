@@ -76,7 +76,3 @@ So here's the invitation: Let down the guard of professional identity; stop stay
 [^1]: The other common protest is "I'm not a gamer." That deserves its own post: [More Than Entertainment](/blog/more-than-entertainment/), on video games that will challenge your notion of what a *game* can be.
 
 [^2]: Or if you have a pen and paper to-hand, you can try one of these doodle practices right now: [intersecting lines](https://www.youtube.com/shorts/q5Sa4qi1Bjw), or [circle patterns](https://youtube.com/shorts/S5GCAtW4FBI?si=WRoIT74QVMGM3Hde).
-
----
-
-*Serenity Sketch* launches on iPad October 6, 2026. [Pre-order it now →](https://apps.apple.com/us/app/serenity-sketch/id6754323337?itscg=30200&itsct=apps_box_link&mttnsubad=6754323337)

@@ -7,5 +7,9 @@ export default defineConfig({
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkPullQuote],
+    remarkRehype: {
+      footnoteLabelTagName: 'h3',
+      footnoteLabelProperties: { className: ['footnotes__label'] },
+    },
   },
 });

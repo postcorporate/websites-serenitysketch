@@ -14,6 +14,8 @@ const blog = defineCollection({
     heroImageAlt: z.string().optional(),
     pullQuote: z.string().optional(),
     pullQuoteAttr: z.string().optional(),
+    // WIP/teaser posts skip the standard "live on iPad" blurb.
+    teaser: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });

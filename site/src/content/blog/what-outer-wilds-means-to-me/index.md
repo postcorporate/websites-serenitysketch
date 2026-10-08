@@ -6,6 +6,7 @@ category: "Inspirations"
 tags: ["outer wilds", "faith and doubt", "nonlinear storytelling"]
 heroImage: "./OuterWilds-1200x675.webp"
 heroImageAlt: "Outer Wilds logo beside a nighttime scene: a camper sits by a small campfire on a grassy hilltop, smoke rising past pine trees, with a ship silhouette and starry sky in the background."
+teaser: true
 draft: false
 ---
 

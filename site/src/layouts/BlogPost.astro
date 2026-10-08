@@ -15,6 +15,7 @@ export interface Props {
   heroImage?: ImageMetadata;
   heroImageAlt?: string;
   slug: string;
+  teaser?: boolean;
   relatedPosts?: { slug: string; title: string }[];
 }
 
@@ -28,8 +29,16 @@ const {
   heroImage,
   heroImageAlt,
   slug,
+  teaser = false,
   relatedPosts = [],
 } = Astro.props;
+
+// Pull footnotes out of the post body so they render after About the author.
+const slotHtml = await Astro.slots.render('default');
+const footnotesMatch = slotHtml.match(/<section[^>]*data-footnotes[\s\S]*?<\/section>/);
+const footnotesHtml = footnotesMatch?.[0] ?? '';
+const bodyHtml = footnotesMatch ? slotHtml.replace(footnotesHtml, '') : slotHtml;
+const appStoreHref = game.appStoreUrl.replace('ct=website', 'ct=blog');
 
 const formattedDate = formatBlogDate(pubDate);
 const studioUrl = studioHref(slug);
@@ -100,8 +109,14 @@ const jsonLd = {
 
       <div class="container">
         <div class="blog-post__body prose">
-          <slot />
+          <Fragment set:html={bodyHtml} />
         </div>
+
+        {!teaser && (
+          <p class="blog-post__cta">
+            <em>{game.name}</em> is live on {game.platform} now. <a href={appStoreHref}>Get it on the App Store →</a>
+          </p>
+        )}
 
         <aside class="blog-post__about">
           <p class="section-eyebrow">About the author</p>
@@ -109,6 +124,12 @@ const jsonLd = {
             <a href={studioUrl} rel="author"><strong>{author}</strong></a> is an interdisciplinary artist, and founder of <a href={studioUrl}>Copper Coin</a>, an independent game studio in the Netherlands. At age 35 he left a career in finance to re-discover his creative side. Now Copper Coin makes “games for the second half of life.” <a href={studioUrl}>Visit the studio.</a>
           </p>
         </aside>
+
+        {footnotesHtml && (
+          <div class="blog-post__footnotes">
+            <Fragment set:html={footnotesHtml} />
+          </div>
+        )}
 
         <footer class="blog-post__footer">
           {relatedPosts.length > 0 && category && (
@@ -367,6 +388,53 @@ const jsonLd = {
 
     .blog-post__about a {
       color: var(--copper-deep);
+    }
+
+    .blog-post__cta {
+      max-width: 720px;
+      margin: 0 0 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      color: var(--ink);
+    }
+
+    .blog-post__cta a {
+      color: var(--copper-deep, var(--copper));
+    }
+
+    .blog-post__footnotes {
+      max-width: 720px;
+      margin: 0 0 2rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .blog-post__footnotes :global(.footnotes__label) {
+      margin: 0 0 0.6rem;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .blog-post__footnotes :global(ol) {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .blog-post__footnotes :global(li) {
+      margin-bottom: 0.45rem;
+    }
+
+    .blog-post__footnotes :global(p) {
+      margin: 0;
+    }
+
+    .blog-post__footnotes :global(a) {
+      color: var(--copper-deep, var(--copper));
     }
 
     .blog-post__footer {
