@@ -325,27 +325,33 @@ const formCode = game.ipadLinkForm.code;
     inset: 0;
     z-index: 80;
     display: flex;
+    /* Lift the sheet: bottom-anchored but inset, not flush to the edge */
     align-items: flex-end;
     justify-content: center;
+    padding: 1rem 0.85rem calc(1.1rem + env(safe-area-inset-bottom));
   }
 
   .get-app-sheet__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(42, 33, 26, 0.55);
+    background: rgba(42, 33, 26, 0.48);
   }
 
   .get-app-sheet__panel {
     position: relative;
     width: 100%;
-    max-height: min(92dvh, 40rem);
+    max-width: 26rem;
+    /* Leave headroom above so the sheet reads upward, not clipped */
+    max-height: min(78dvh, 36rem);
     overflow: auto;
     overscroll-behavior: contain;
-    background: var(--paper);
+    background: rgba(246, 239, 227, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     color: var(--ink);
-    border-radius: 18px 18px 0 0;
-    padding: 1.15rem 1.15rem calc(1.15rem + env(safe-area-inset-bottom));
-    box-shadow: 0 -12px 40px rgba(20, 12, 4, 0.28);
+    border-radius: 18px;
+    padding: 1.15rem;
+    box-shadow: 0 12px 40px rgba(20, 12, 4, 0.28);
   }
 
   .get-app-sheet__panel:focus {
@@ -359,9 +365,9 @@ const formCode = game.ipadLinkForm.code;
 
   :global(html[data-device="desktop"]) .get-app-sheet__panel {
     width: min(26rem, 100%);
-    border-radius: 18px;
-    max-height: min(86dvh, 40rem);
+    max-height: min(82dvh, 36rem);
     padding: 1.35rem 1.35rem 1.2rem;
+    background: rgba(246, 239, 227, 0.92);
   }
 
   .get-app-sheet__close {

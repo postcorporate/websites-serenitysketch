@@ -537,13 +537,13 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
 
 
     .hero-chips {
-      /* Size the 2x2 to the longest label, then equalize both columns.
-         Keeps a true 2x2 even on 320px phones without leftover right space. */
-      display: inline-grid;
+      /* Fluid 2x2: fill the hero column on phones, cap on desktop.
+         Equal columns; labels stay left, extra width becomes breathing room. */
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.55rem;
-      width: max-content;
-      max-width: 100%;
+      width: 100%;
+      max-width: 22rem;
     }
     .hero-chip {
       height: 3.5rem;
