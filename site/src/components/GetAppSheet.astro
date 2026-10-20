@@ -195,6 +195,9 @@ const formCode = game.ipadLinkForm.code;
           el.style.setProperty('width', '100%', 'important');
           el.style.setProperty('margin', '0', 'important');
           el.style.setProperty('margin-top', '0', 'important');
+          el.style.setProperty('font-family', '"Baloo 2", system-ui, sans-serif', 'important');
+          el.style.setProperty('font-size', '1.0625rem', 'important');
+          el.style.setProperty('font-weight', '600', 'important');
         }
         function paintHover() {
           el.style.setProperty('background', '#B26A43', 'important');
@@ -486,7 +489,7 @@ const formCode = game.ipadLinkForm.code;
     background: var(--copper);
     color: var(--paper);
     font-family: var(--sans);
-    font-size: 0.95rem;
+    font-size: 1.0625rem; /* ~17px — match Email me the link */
     font-weight: 600;
     cursor: pointer;
   }
@@ -555,7 +558,7 @@ const formCode = game.ipadLinkForm.code;
     background-color: var(--paper) !important;
     color: var(--copper) !important;
     font-family: var(--sans) !important;
-    font-size: 0.95rem !important;
+    font-size: 1.0625rem !important;
     font-weight: 600 !important;
     line-height: 1.2 !important;
     border: 0 !important;
