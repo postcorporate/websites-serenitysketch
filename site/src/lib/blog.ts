@@ -38,7 +38,7 @@ export function categorySlug(category: string): string {
 }
 
 export function categoryHref(category: string): string {
-  return `/blog/category/${categorySlug(category)}`;
+  return `/blog/category/${categorySlug(category)}/`;
 }
 
 export function formatBlogDate(date: Date): string {

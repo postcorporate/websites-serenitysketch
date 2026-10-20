@@ -19,7 +19,7 @@ const TitleTag = titleTag;
   <ul class="post-list">
     {posts.map((post) => (
       <li class="post-card">
-        <a href={`/blog/${post.slug}`} class:list={['post-card__link', post.data.heroImage && 'post-card__link--has-image']}>
+        <a href={`/blog/${post.slug}/`} class:list={['post-card__link', post.data.heroImage && 'post-card__link--has-image']}>
           {post.data.heroImage && (
             <div class="post-card__image-wrap">
               <Image

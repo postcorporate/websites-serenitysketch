@@ -42,7 +42,7 @@ const appStoreHref = game.appStoreUrl.replace('ct=website', 'ct=blog');
 
 const formattedDate = formatBlogDate(pubDate);
 const studioUrl = studioHref(slug);
-const categoryUrl = category ? categoryHref(category) : '/blog';
+const categoryUrl = category ? categoryHref(category) : '/blog/';
 
 const ogImageSrc = heroImage
   ? (await getImage({ src: heroImage, width: 1200, height: 675 })).src
@@ -140,13 +140,13 @@ const jsonLd = {
               <ul>
                 {relatedPosts.map((related) => (
                   <li>
-                    <a href={`/blog/${related.slug}`}>{related.title}</a>
+                    <a href={`/blog/${related.slug}/`}>{related.title}</a>
                   </li>
                 ))}
               </ul>
             </nav>
           )}
-          <a href="/blog" class="blog-back-link">← All posts</a>
+          <a href="/blog/" class="blog-back-link">← All posts</a>
         </footer>
       </div>
 

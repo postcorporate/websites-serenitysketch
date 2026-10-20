@@ -3,6 +3,7 @@ import Main from '../layouts/Main.astro';
 import PostList from '../components/PostList.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import GetAppSheet from '../components/GetAppSheet.astro';
 import game from '../../../shared/game.json';
 import { getPublishedPosts } from '../lib/blog';
 
@@ -10,6 +11,44 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
 ---
 
 <Main>
+  <script slot="head" is:inline>
+    (function () {
+      var ua = navigator.userAgent || '';
+      var platform = navigator.platform || '';
+      var touch = navigator.maxTouchPoints || 0;
+      var device = 'desktop';
+      if (/iPhone|iPod/.test(ua)) device = 'iphone';
+      else if (/iPad/.test(ua) || platform === 'iPad' || (touch > 1 && (/Macintosh/.test(ua) || platform === 'MacIntel'))) device = 'ipad';
+      else if (/Android/i.test(ua)) device = 'android';
+      document.documentElement.setAttribute('data-device', device);
+      document.documentElement.setAttribute('data-share', typeof navigator.share === 'function' ? 'native' : 'copy');
+    })();
+  </script>
+  <style slot="head" is:inline>
+    html[data-device="iphone"] .hero-chip--store .app-store-badge,
+    html[data-device="android"] .hero-chip--store .app-store-badge,
+    html[data-device="desktop"] .hero-chip--store .app-store-badge {
+      display: none !important;
+    }
+    .get-app-open { display: none; }
+    html[data-device="iphone"] .get-app-open,
+    html[data-device="android"] .get-app-open,
+    html[data-device="desktop"] .get-app-open {
+      display: flex !important;
+    }
+    html[data-device="iphone"] .hero-chip--store,
+    html[data-device="android"] .hero-chip--store,
+    html[data-device="desktop"] .hero-chip--store {
+      background: rgba(255, 255, 255, 0.22);
+    }
+    html[data-device="iphone"] .hero-chip--store::after,
+    html[data-device="android"] .hero-chip--store::after,
+    html[data-device="desktop"] .hero-chip--store::after {
+      content: none !important;
+    }
+    .hero-store-note { display: none !important; }
+    html[data-device="ipad"] .hero-store-note { display: block !important; }
+  </style>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -149,11 +188,15 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
             <a class="app-store-badge" href={game.appStoreUrl} target="_blank" rel="noopener noreferrer" aria-label="Download Serenity Sketch on the App Store">
               <img src="/assets/images/app-store-badge/Download_on_the_App_Store_Badge_US-UK_RGB_blk.svg" alt="Download on the App Store" width="163" height="54">
             </a>
+            <button type="button" class="get-app-open" id="get-app-open" aria-haspopup="dialog" aria-controls="get-app-sheet" aria-expanded="false">Get the app</button>
           </li>
+          <li class="hero-store-note">Free to try. First two Practices included.</li>
         </ul>
 
       </div>
     </section>
+
+    <GetAppSheet />
 
     <!-- ============================================================
          2. ABOUT
@@ -360,25 +403,27 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
         var RADIUS = '14px';
 
         function styleML() {
+          var root = document.getElementById('signup');
+          if (!root) return;
           // Hide ML's own copy block
-          document.querySelectorAll('.ml-form-embedContent').forEach(function (el) {
+          root.querySelectorAll('.ml-form-embedContent').forEach(function (el) {
             el.style.setProperty('display', 'none', 'important');
           });
           // Strip ML wrapper background/border
-          document.querySelectorAll('.ml-form-embedWrapper, .ml-form-embedBody').forEach(function (el) {
+          root.querySelectorAll('.ml-form-embedWrapper, .ml-form-embedBody').forEach(function (el) {
             el.style.setProperty('background', 'transparent', 'important');
             el.style.setProperty('border', 'none', 'important');
             el.style.setProperty('box-shadow', 'none', 'important');
             el.style.setProperty('padding', '0', 'important');
           });
           // Style email input
-          document.querySelectorAll('.ml-embedded input[type="email"]').forEach(function (el) {
+          root.querySelectorAll('.ml-embedded input[type="email"]').forEach(function (el) {
             el.style.setProperty('font-family', SANS, 'important');
             el.style.setProperty('font-size', '1rem', 'important');
             el.style.setProperty('border-radius', RADIUS, 'important');
           });
           // Style submit button
-          document.querySelectorAll('.ml-embedded button[type="submit"]').forEach(function (el) {
+          root.querySelectorAll('.ml-embedded button[type="submit"]').forEach(function (el) {
             el.style.setProperty('background', COPPER, 'important');
             el.style.setProperty('color', PAPER, 'important');
             el.style.setProperty('font-family', SANS, 'important');
@@ -467,7 +512,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
     <section id="blog" class="section section-blog">
       <div class="container">
         <p class="section-eyebrow">Blog</p>
-        <h2 class="display"><a href="/blog">Brushstrokes</a></h2>
+        <h2 class="display"><a href="/blog/">Brushstrokes</a></h2>
         <p class="blog-home-lead">Thoughts on mindfulness, creativity, and making <em>Serenity Sketch</em>.</p>
         <div class="blog-home-list">
           <PostList posts={latestPosts} titleTag="h3" />
@@ -492,10 +537,13 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
 
 
     .hero-chips {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      max-width: 23rem;
-      width: 100%;
+      /* Size the 2x2 to the longest label, then equalize both columns.
+         Keeps a true 2x2 even on 320px phones without leftover right space. */
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+      width: max-content;
+      max-width: 100%;
     }
     .hero-chip {
       height: 3.5rem;
@@ -503,15 +551,20 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       text-decoration: none;
       transition: background 160ms var(--ease);
     }
-    /* Text chips: less chrome around the icon so labels stay 2 lines on mobile */
+    /* Text chips: tight padding so icon + 2 lines fill the capsule */
     a.hero-chip {
-      padding: 0.5rem 0.65rem 0.5rem 0.4rem;
-      gap: 0.5rem;
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.45rem 0.5rem 0.45rem 0.3rem;
+      gap: 0.35rem;
+      font-size: 0.875rem;
+      line-height: 1.2;
     }
     a.hero-chip .hero-chip__icon-wrap,
     a.hero-chip .hero-chip__icon {
-      width: 40px;
-      height: 40px;
+      width: 34px;
+      height: 34px;
     }
     a.hero-chip:hover,
     a.hero-chip:focus-visible {
@@ -552,6 +605,48 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       display: block;
       transform: scale(1.13, 1.13);
       transform-origin: center;
+    }
+    .get-app-open {
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0.45rem 0.5rem;
+      border: 0;
+      border-radius: inherit;
+      background: transparent;
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .hero-chip--store:has(.get-app-open:hover),
+    .hero-chip--store:has(.get-app-open:focus-visible) {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .get-app-open:hover,
+    .get-app-open:focus-visible {
+      color: var(--paper);
+    }
+    .hero-store-note {
+      height: auto;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border-radius: 0;
+      grid-column: 1 / -1;
+      justify-self: stretch;
+      text-align: right;
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--paper);
+      text-shadow: 0 1px 3px rgba(10, 6, 2, 0.65);
     }
 
     .beat-media--quote {
@@ -613,20 +708,20 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
 
     /* Mailerlite overrides — must use :global() because ML injects HTML
        after page render; Astro's scoped hash won't be on those elements. */
-    :global(.ml-embedded .ml-form-embedWrapper) {
+    :global(#signup .ml-embedded .ml-form-embedWrapper) {
       background: transparent !important;
       border: none !important;
       box-shadow: none !important;
     }
-    :global(.ml-embedded .ml-form-embedBody) {
+    :global(#signup .ml-embedded .ml-form-embedBody) {
       padding: 0 !important;
       background: transparent !important;
     }
     /* Hide ML's own heading and description — we supply our own */
-    :global(.ml-embedded .ml-form-embedContent) {
+    :global(#signup .ml-embedded .ml-form-embedContent) {
       display: none !important;
     }
-    :global(.ml-embedded input[type="email"]) {
+    :global(#signup .ml-embedded input[type="email"]) {
       border: 1px solid var(--rule) !important;
       border-radius: var(--radius) !important;
       background: var(--paper) !important;
@@ -635,7 +730,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       color: var(--ink) !important;
       padding: 0.75rem 1rem !important;
     }
-    :global(.ml-embedded button[type="submit"]) {
+    :global(#signup .ml-embedded button[type="submit"]) {
       background: var(--copper) !important;
       color: var(--paper) !important;
       font-family: var(--sans) !important;
@@ -647,7 +742,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       cursor: pointer !important;
       border: none !important;
     }
-    :global(.ml-embedded button[type="submit"]:hover) {
+    :global(#signup .ml-embedded button[type="submit"]:hover) {
       opacity: 0.88 !important;
     }
 

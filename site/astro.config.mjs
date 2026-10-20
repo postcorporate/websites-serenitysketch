@@ -4,6 +4,7 @@ import { remarkPullQuote } from './src/lib/remark-pull-quote.mjs';
 
 export default defineConfig({
   site: 'https://serenitysketch.com',
+  trailingSlash: 'always',
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkPullQuote],

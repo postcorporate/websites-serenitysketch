@@ -14,7 +14,7 @@ WIP Teaser for an upcoming post. This isn't complete!
 
 SPOILERS BELOW! Don't read if you're considering playing Outer Wilds. And you should consider it. Or watching someone play it, if you don't like holding a controller and such.
 
-As I wrote in [this earlier post](/blog/in-praise-of-pause), a game called Outer Wilds hit me hard, on several levels. So much so that it pushed me to change careers.
+As I wrote in [this earlier post](/blog/in-praise-of-pause/), a game called Outer Wilds hit me hard, on several levels. So much so that it pushed me to change careers.
 
 Here's what I'll be writing about:
 

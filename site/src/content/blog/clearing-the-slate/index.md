@@ -12,7 +12,7 @@ draft: false
 
 WIP Teaser for an upcoming post.
 
-In [another post](/blog/in-praise-of-pause), I mentioned I'd save the specifics of my career/life Pause for another post. This is that post (well the beginning of it, it's still simmering).
+In [another post](/blog/in-praise-of-pause/), I mentioned I'd save the specifics of my career/life Pause for another post. This is that post (well the beginning of it, it's still simmering).
 
 Some bullets of what I'll to write more about:
 

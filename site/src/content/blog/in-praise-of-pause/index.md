@@ -40,7 +40,7 @@ Fast-forward a few years, and I've reoriented my striving toward making video ga
 
 **I make games that create that moment of pause and re-evaluation**, like *Outer Wilds* did for me.
 
-*[Serenity Sketch](https://serenitysketch.com/)* is my first game (or "app" if you're put off the word game). It's a guided Practice of pausing. In it, you take ten minutes to paint with water on a digital stone. And then let go as your creation gently evaporates. (I wrote more about [why I made it](/blog/why-i-made-this).)
+*[Serenity Sketch](https://serenitysketch.com/)* is my first game (or "app" if you're put off the word game). It's a guided Practice of pausing. In it, you take ten minutes to paint with water on a digital stone. And then let go as your creation gently evaporates. (I wrote more about [why I made it](/blog/why-i-made-this/).)
 
-[^1]: There's a ton more to say about Outer Wilds and its meaning to me, so I'm linking to [a future post on this topic](/blog/what-outer-wilds-means-to-me).
-[^2]: [More specifics](/blog/clearing-the-slate) on how I career-puased, took a deep breath, and then found my way into video games
+[^1]: There's a ton more to say about Outer Wilds and its meaning to me, so I'm linking to [a future post on this topic](/blog/what-outer-wilds-means-to-me/).
+[^2]: [More specifics](/blog/clearing-the-slate/) on how I career-puased, took a deep breath, and then found my way into video games

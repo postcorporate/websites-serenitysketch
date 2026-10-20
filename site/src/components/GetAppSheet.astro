@@ -1,0 +1,536 @@
+---
+import game from '../../../shared/game.json';
+
+const formCode = game.ipadLinkForm.code;
+---
+
+<div
+  id="get-app-sheet"
+  class="get-app-sheet"
+  hidden
+  data-app-store-url={game.appStoreUrl}
+  data-form-code={formCode}
+>
+  <div class="get-app-sheet__backdrop" data-get-app-close></div>
+  <div
+    class="get-app-sheet__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="get-app-title"
+    tabindex="-1"
+  >
+    <button type="button" class="get-app-sheet__close" data-get-app-close aria-label="Close">
+      <span aria-hidden="true">✕</span>
+    </button>
+    <h2 id="get-app-title" class="get-app-sheet__title">Get the app</h2>
+    <p class="get-app-sheet__lead"><em>Serenity Sketch</em> is made for iPad. Send the link to the iPad you'll play on.</p>
+
+    <div class="get-app-row">
+      <h3 class="get-app-row__title">Send it to my iPad</h3>
+      <div class="get-app-send">
+        <button type="button" id="get-app-share" class="get-app-share" data-label="Share">Share</button>
+        <button type="button" id="get-app-copy" class="get-app-copy" data-label="Copy link">Copy link</button>
+        <span id="get-app-copied" class="visually-hidden" role="status" aria-live="polite"></span>
+      </div>
+      <p class="get-app-or">Or email it to me</p>
+      <div id="get-app-email-form" class="ml-embedded" data-form={formCode}></div>
+      <label id="get-app-notify" class="get-app-notify">
+        <input type="checkbox" id="get-app-notify-input">
+        <span class="get-app-notify__iphone">Tell me when it's on iPhone</span>
+        <span class="get-app-notify__android">Tell me when it's on Android</span>
+      </label>
+    </div>
+
+    <div class="get-app-row get-app-row--steam">
+      <a id="get-app-steam" class="get-app-steam" href={game.steamUrl} target="_blank" rel="noopener noreferrer">Wishlist on Steam</a>
+    </div>
+
+    <p class="get-app-row get-app-row--appstore">
+      <a id="get-app-appstore" class="get-app-appstore" href={game.appStoreUrl} target="_blank" rel="noopener noreferrer">Open the App Store page</a>
+    </p>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var sheet = document.getElementById('get-app-sheet');
+    var openBtn = document.getElementById('get-app-open');
+    if (!sheet || !openBtn) return;
+
+    var panel = sheet.querySelector('.get-app-sheet__panel');
+    var embed = sheet.querySelector('.ml-embedded');
+    var appUrl = sheet.getAttribute('data-app-store-url') || '';
+    var lastFocus = null;
+    var copiedTimer = 0;
+
+    function device() {
+      var value = document.documentElement.getAttribute('data-device');
+      if (value === 'iphone' || value === 'android' || value === 'desktop') return value;
+      return 'desktop';
+    }
+
+    function pushOpen() {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'get_app_open', device: device() });
+    }
+
+    function pushAction(action) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'get_app_action', action: action, device: device() });
+    }
+
+    function notifyValue() {
+      var box = document.getElementById('get-app-notify-input');
+      var current = document.documentElement.getAttribute('data-device');
+      if (!box || !box.checked) return '';
+      if (current === 'iphone' || current === 'android') return current;
+      return '';
+    }
+
+    function syncNotify() {
+      if (!embed) return;
+      var form = embed.querySelector('form');
+      if (!form) return;
+      var hidden = form.querySelector('input[name="fields[notify_platform]"], input[name*="notify_platform"]');
+      if (!hidden) {
+        hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'fields[notify_platform]';
+        hidden.setAttribute('data-get-app-notify', 'inserted');
+        form.appendChild(hidden);
+      }
+      hidden.value = notifyValue();
+    }
+
+    function buildNotify() {
+      var label = document.createElement('label');
+      label.id = 'get-app-notify';
+      label.className = 'get-app-notify';
+      label.innerHTML = '<input type="checkbox" id="get-app-notify-input">'
+        + '<span class="get-app-notify__iphone">Tell me when it\'s on iPhone</span>'
+        + '<span class="get-app-notify__android">Tell me when it\'s on Android</span>';
+      return label;
+    }
+
+    function placeNotify() {
+      if (!embed) return;
+      var row = embed.querySelector('.ml-form-fieldRow');
+      if (!row) return;
+      var label = document.getElementById('get-app-notify') || buildNotify();
+      if (label.previousElementSibling !== row) row.insertAdjacentElement('afterend', label);
+      label.classList.add('is-placed');
+    }
+
+    function styleIpadForm() {
+      if (!embed) return;
+      embed.querySelectorAll('.ml-form-embedWrapper, .ml-form-embedBody, .ml-form-successBody').forEach(function (el) {
+        el.style.setProperty('background', 'transparent', 'important');
+        el.style.setProperty('border', 'none', 'important');
+        el.style.setProperty('box-shadow', 'none', 'important');
+        el.style.setProperty('padding', '0', 'important');
+      });
+      embed.querySelectorAll('.ml-form-embedContent').forEach(function (el) {
+        el.style.setProperty('display', 'none', 'important');
+      });
+      embed.querySelectorAll('.ml-form-embedContainer').forEach(function (el) {
+        el.style.setProperty('margin', '0', 'important');
+        el.style.setProperty('width', '100%', 'important');
+      });
+      embed.querySelectorAll('input[type="email"]').forEach(function (el) {
+        el.style.setProperty('background', '#fff', 'important');
+        el.style.setProperty('border', '1px solid var(--sand-deep)', 'important');
+        el.style.setProperty('border-radius', '14px', 'important');
+        el.style.setProperty('box-shadow', 'none', 'important');
+        el.style.setProperty('font-family', '"Baloo 2", system-ui, sans-serif', 'important');
+        el.style.setProperty('font-size', '1rem', 'important');
+        el.style.setProperty('color', 'var(--ink)', 'important');
+        el.style.setProperty('padding', '0.75rem 1rem', 'important');
+        el.style.setProperty('width', '100%', 'important');
+        el.style.setProperty('box-sizing', 'border-box', 'important');
+      });
+      embed.querySelectorAll('button[type="submit"]').forEach(function (el) {
+        el.style.setProperty('background', 'var(--copper)', 'important');
+        el.style.setProperty('color', 'var(--paper)', 'important');
+        el.style.setProperty('font-family', '"Baloo 2", system-ui, sans-serif', 'important');
+        el.style.setProperty('font-size', '0.95rem', 'important');
+        el.style.setProperty('font-weight', '600', 'important');
+        el.style.setProperty('border', 'none', 'important');
+        el.style.setProperty('border-radius', '999px', 'important');
+        el.style.setProperty('padding', '0.75rem 1.1rem', 'important');
+        el.style.setProperty('width', '100%', 'important');
+        el.style.setProperty('cursor', 'pointer', 'important');
+        el.style.setProperty('margin-top', '0.75rem', 'important');
+      });
+    }
+
+    function refreshForm() {
+      styleIpadForm();
+      placeNotify();
+      syncNotify();
+    }
+
+    function isVisible(el) {
+      return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+    }
+
+    function focusable() {
+      return Array.prototype.filter.call(
+        panel.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea, select, [tabindex]:not([tabindex="-1"])'),
+        isVisible
+      );
+    }
+
+    function onKey(e) {
+      if (sheet.hidden) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeSheet();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      var nodes = focusable();
+      if (!nodes.length) {
+        e.preventDefault();
+        return;
+      }
+      var first = nodes[0];
+      var last = nodes[nodes.length - 1];
+      var active = document.activeElement;
+      if (e.shiftKey && (active === first || active === panel || !panel.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    function openSheet() {
+      if (!sheet.hidden) return;
+      lastFocus = document.activeElement;
+      sheet.hidden = false;
+      document.body.classList.add('get-app-lock');
+      openBtn.setAttribute('aria-expanded', 'true');
+      document.addEventListener('keydown', onKey);
+      panel.focus();
+      refreshForm();
+    }
+
+    function closeSheet() {
+      if (sheet.hidden) return;
+      sheet.hidden = true;
+      document.body.classList.remove('get-app-lock');
+      openBtn.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('keydown', onKey);
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    function confirmCopied(btn) {
+      var live = document.getElementById('get-app-copied');
+      var label = btn.getAttribute('data-label') || 'Copy link';
+      btn.textContent = 'Copied';
+      if (live) live.textContent = 'Copied';
+      window.clearTimeout(copiedTimer);
+      copiedTimer = window.setTimeout(function () {
+        btn.textContent = label;
+        if (live) live.textContent = '';
+      }, 2000);
+    }
+
+    function copyLink(btn) {
+      var done = function () { confirmCopied(btn); };
+      var fallback = function () {
+        var field = document.createElement('textarea');
+        field.value = appUrl;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.left = '-9999px';
+        document.body.appendChild(field);
+        field.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+        field.remove();
+        if (ok) done();
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(appUrl).then(done).catch(fallback);
+      } else {
+        fallback();
+      }
+    }
+
+    openBtn.addEventListener('click', function () {
+      pushOpen();
+      openSheet();
+    });
+
+    sheet.addEventListener('click', function (e) {
+      var target = e.target;
+      if (target.closest('[data-get-app-close]')) {
+        closeSheet();
+        return;
+      }
+      if (target.closest('#get-app-share')) {
+        pushAction('share');
+        var shareBtn = document.getElementById('get-app-share');
+        if (!navigator.share) {
+          copyLink(shareBtn);
+          return;
+        }
+        navigator.share({
+          title: 'Serenity Sketch',
+          text: 'Serenity Sketch on iPad',
+          url: appUrl
+        }).catch(function (err) {
+          if (err && err.name === 'AbortError') return;
+          copyLink(shareBtn);
+        });
+        return;
+      }
+      if (target.closest('#get-app-copy')) {
+        pushAction('copy');
+        copyLink(document.getElementById('get-app-copy'));
+        return;
+      }
+      if (target.closest('#get-app-steam')) pushAction('steam');
+      if (target.closest('#get-app-appstore')) pushAction('appstore_page');
+    });
+
+    document.addEventListener('change', function (e) {
+      if (e.target && e.target.id === 'get-app-notify-input') syncNotify();
+    });
+    document.addEventListener('click', function (e) {
+      if (e.target && e.target.closest && e.target.closest('#get-app-email-form button[type="submit"]')) syncNotify();
+    }, true);
+    document.addEventListener('submit', function (e) {
+      if (e.target && embed && embed.contains(e.target)) syncNotify();
+    }, true);
+
+    if (embed) {
+      var observer = new MutationObserver(refreshForm);
+      observer.observe(embed, { childList: true, subtree: true });
+    }
+    refreshForm();
+    window.addEventListener('load', refreshForm);
+  })();
+</script>
+
+<style>
+  .get-app-sheet[hidden] {
+    display: none !important;
+  }
+
+  .get-app-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .get-app-sheet__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(42, 33, 26, 0.55);
+  }
+
+  .get-app-sheet__panel {
+    position: relative;
+    width: 100%;
+    max-height: min(92dvh, 40rem);
+    overflow: auto;
+    overscroll-behavior: contain;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 18px 18px 0 0;
+    padding: 1.15rem 1.15rem calc(1.15rem + env(safe-area-inset-bottom));
+    box-shadow: 0 -12px 40px rgba(20, 12, 4, 0.28);
+  }
+
+  .get-app-sheet__panel:focus {
+    outline: none;
+  }
+
+  :global(html[data-device="desktop"]) .get-app-sheet {
+    align-items: center;
+    padding: 1.25rem;
+  }
+
+  :global(html[data-device="desktop"]) .get-app-sheet__panel {
+    width: min(26rem, 100%);
+    border-radius: 18px;
+    max-height: min(86dvh, 40rem);
+    padding: 1.35rem 1.35rem 1.2rem;
+  }
+
+  .get-app-sheet__close {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 1.05rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .get-app-sheet__close:hover,
+  .get-app-sheet__close:focus-visible {
+    background: var(--sand);
+  }
+
+  .get-app-sheet__title {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0 2rem 0.35rem 0;
+  }
+
+  .get-app-sheet__lead {
+    margin: 0 0 1rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .get-app-row + .get-app-row {
+    margin-top: 0.95rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .get-app-row--steam,
+  .get-app-row--appstore {
+    display: none;
+  }
+
+  :global(html[data-device="android"]) .get-app-row--steam,
+  :global(html[data-device="desktop"]) .get-app-row--steam,
+  :global(html[data-device="desktop"]) .get-app-row--appstore {
+    display: block;
+  }
+
+  .get-app-row__title {
+    margin: 0 0 0.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .get-app-send {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .get-app-share,
+  .get-app-copy {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.6rem;
+    padding: 0.55rem 1.15rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--copper);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  :global(html[data-share="native"]) .get-app-share,
+  :global(html[data-share="copy"]) .get-app-copy {
+    display: inline-flex;
+  }
+
+  .get-app-share:hover,
+  .get-app-copy:hover,
+  .get-app-share:focus-visible,
+  .get-app-copy:focus-visible {
+    background: var(--copper-deep);
+    color: var(--paper);
+  }
+
+  .get-app-or {
+    margin: 0.85rem 0 0.45rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+
+  .get-app-notify {
+    display: none;
+    align-items: flex-start;
+    gap: 0.55rem;
+    margin: 0.7rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  :global(html[data-device="iphone"]) .get-app-notify.is-placed,
+  :global(html[data-device="android"]) .get-app-notify.is-placed {
+    display: flex;
+  }
+
+  .get-app-notify input {
+    margin: 0.15rem 0 0;
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+    accent-color: var(--copper);
+  }
+
+  .get-app-notify__iphone,
+  .get-app-notify__android {
+    display: none;
+  }
+
+  :global(html[data-device="iphone"]) .get-app-notify__iphone,
+  :global(html[data-device="android"]) .get-app-notify__android {
+    display: inline;
+  }
+
+  .get-app-steam {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.65rem 1rem;
+    border: 1.5px solid var(--sand-deep);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .get-app-steam:hover,
+  .get-app-steam:focus-visible {
+    color: var(--ink);
+    background: var(--paper-soft);
+  }
+
+  .get-app-row--appstore {
+    margin: 0;
+    text-align: center;
+  }
+
+  .get-app-appstore {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  :global(body.get-app-lock) {
+    overflow: hidden;
+  }
+</style>

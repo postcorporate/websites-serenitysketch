@@ -17,7 +17,7 @@ Our Lead Designer, Meggy Pepelanova, had been nudging me for a while to write th
 
 You reach a certain age when you start thinking seriously about what impact you're having on our world. If you're bringing something beautiful into it.
 
-For me that was 2022, when I was in an intense, performance-focused Wall Street career. I was grateful for what it gave me, but it paid no heed to my creativity. I could feel how lopsided I'd become after years of pouring myself into whatever got rewarded around me. (I wrote more about that in [In Praise of Pause](/blog/in-praise-of-pause).)
+For me that was 2022, when I was in an intense, performance-focused Wall Street career. I was grateful for what it gave me, but it paid no heed to my creativity. I could feel how lopsided I'd become after years of pouring myself into whatever got rewarded around me. (I wrote more about that in [In Praise of Pause](/blog/in-praise-of-pause/).)
 
 I attended my first ever meditation retreat, hoping it would help me hit the reset button. But meditation surprised me. I half expected it to leave me aloof and empty-headed, yet instead the space it carved out actually stirred **new creativity**. I know you're not *supposed* to be thinking about stuff while you meditate, but I must admit more than a few sessions where I was struck with artistic inspiration while repeating my mantra.
 
