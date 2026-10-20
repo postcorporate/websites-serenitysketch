@@ -22,41 +22,46 @@ const formCode = game.ipadLinkForm.code;
     <button type="button" class="get-app-sheet__close" data-get-app-close aria-label="Close">
       <span aria-hidden="true">✕</span>
     </button>
-    <h2 id="get-app-title" class="get-app-sheet__title">Get the iPad app</h2>
-    <p class="get-app-sheet__lead"><em>Serenity Sketch</em> is available on iPad. Share the link to the iPad you'll play on.</p>
 
-    <div class="get-app-row">
-      <div class="get-app-send">
-        <button type="button" id="get-app-share" class="get-app-share" data-label="Send it to my iPad">Send it to my iPad</button>
-        <button type="button" id="get-app-copy" class="get-app-copy" data-label="Send it to my iPad">Send it to my iPad</button>
-        <span id="get-app-copied" class="visually-hidden" role="status" aria-live="polite"></span>
+    <h2 id="get-app-title" class="get-app-sheet__title">Made for iPad</h2>
+    <p class="get-app-sheet__lead"><em>Serenity Sketch</em> is on iPad for now. Send yourself the link and open it there.</p>
+
+    <div class="get-app-send">
+      <button type="button" id="get-app-share" class="get-app-share" data-label="Share link">Share link</button>
+      <button type="button" id="get-app-copy" class="get-app-copy" data-label="Copy link">Copy link</button>
+      <span id="get-app-copied" class="visually-hidden" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="get-app-divider" role="separator" aria-hidden="true"><span>or</span></div>
+
+    <div id="get-app-email-form" class="ml-embedded get-app-email" data-form={formCode}></div>
+    <label id="get-app-notify" class="get-app-notify">
+      <input type="checkbox" id="get-app-notify-input">
+      <span class="get-app-notify__iphone">Tell me when it's on iPhone</span>
+      <span class="get-app-notify__android">Tell me when it's on Android</span>
+    </label>
+
+    <div class="get-app-footer">
+      <p class="get-app-footer__prompt">Not on iPad?</p>
+      <div class="get-app-footer__links">
+        <a id="get-app-steam" class="get-app-steam" href={game.steamUrl} target="_blank" rel="noopener noreferrer">
+          <img class="get-app-steam__icon" src="/assets/images/steam-logo.svg" alt="" width="14" height="14" decoding="async">
+          Wishlist on Steam
+        </a>
+        <a id="get-app-appstore" class="get-app-appstore" href={game.appStoreUrl} target="_blank" rel="noopener noreferrer">View on the App Store</a>
       </div>
-      <p class="get-app-or">Or email me the App Store link</p>
-      <div id="get-app-email-form" class="ml-embedded" data-form={formCode}></div>
-      <label id="get-app-notify" class="get-app-notify">
-        <input type="checkbox" id="get-app-notify-input">
-        <span class="get-app-notify__iphone">Tell me when it releases on iPhone</span>
-        <span class="get-app-notify__android">Tell me when it releases on Android</span>
-      </label>
     </div>
-
-    <div class="get-app-row get-app-row--steam">
-      <a id="get-app-steam" class="get-app-steam" href={game.steamUrl} target="_blank" rel="noopener noreferrer" aria-label="Wishlist Serenity Sketch on Steam">
-        <img src="/assets/images/wishlist-steam-white-capsule.png" alt="Wishlist on Steam" width="220" height="75" loading="lazy" decoding="async">
-      </a>
-    </div>
-
-    <p class="get-app-row get-app-row--appstore">
-      <a id="get-app-appstore" class="get-app-appstore" href={game.appStoreUrl} target="_blank" rel="noopener noreferrer">Open the App Store page</a>
-    </p>
   </div>
 </div>
 
 <script is:inline>
   (function () {
+    function boot() {
     var sheet = document.getElementById('get-app-sheet');
     var openBtn = document.getElementById('get-app-open');
     if (!sheet || !openBtn) return;
+    if (openBtn.dataset.getAppBound === '1') return;
+    openBtn.dataset.getAppBound = '1';
 
     var panel = sheet.querySelector('.get-app-sheet__panel');
     var embed = sheet.querySelector('.ml-embedded');
@@ -68,6 +73,11 @@ const formCode = game.ipadLinkForm.code;
       var value = document.documentElement.getAttribute('data-device');
       if (value === 'iphone' || value === 'android' || value === 'desktop') return value;
       return 'desktop';
+    }
+
+    function isPhone() {
+      var d = device();
+      return d === 'iphone' || d === 'android';
     }
 
     function pushOpen() {
@@ -82,10 +92,8 @@ const formCode = game.ipadLinkForm.code;
 
     function notifyValue() {
       var box = document.getElementById('get-app-notify-input');
-      var current = document.documentElement.getAttribute('data-device');
-      if (!box || !box.checked) return '';
-      if (current === 'iphone' || current === 'android') return current;
-      return '';
+      if (!box || !box.checked || !isPhone()) return '';
+      return device();
     }
 
     function syncNotify() {
@@ -108,18 +116,29 @@ const formCode = game.ipadLinkForm.code;
       label.id = 'get-app-notify';
       label.className = 'get-app-notify';
       label.innerHTML = '<input type="checkbox" id="get-app-notify-input">'
-        + '<span class="get-app-notify__iphone">Tell me when it releases on iPhone</span>'
-        + '<span class="get-app-notify__android">Tell me when it releases on Android</span>';
+        + '<span class="get-app-notify__iphone">Tell me when it\'s on iPhone</span>'
+        + '<span class="get-app-notify__android">Tell me when it\'s on Android</span>';
       return label;
     }
 
     function placeNotify() {
-      if (!embed) return;
-      var row = embed.querySelector('.ml-form-fieldRow');
-      if (!row) return;
       var label = document.getElementById('get-app-notify') || buildNotify();
-      if (label.previousElementSibling !== row) row.insertAdjacentElement('afterend', label);
+      // Keep notify outside the MailerLite embed — inserting into ML's submit
+      // row puts the checkbox beside the button and crushes the label text.
+      if (embed && label.parentElement !== embed.parentElement) {
+        embed.insertAdjacentElement('afterend', label);
+      }
+      if (!isPhone()) {
+        label.classList.remove('is-placed');
+        label.hidden = true;
+        var box = label.querySelector('input');
+        if (box) box.checked = false;
+        syncNotify();
+        return;
+      }
+      label.hidden = false;
       label.classList.add('is-placed');
+      syncNotify();
     }
 
     function styleIpadForm() {
@@ -137,10 +156,19 @@ const formCode = game.ipadLinkForm.code;
         el.style.setProperty('margin', '0', 'important');
         el.style.setProperty('width', '100%', 'important');
       });
+      // Kill MailerLite’s default field/button stacking gaps
+      embed.querySelectorAll('.ml-form-formContent, .ml-form-fieldRow, .ml-form-embedSubmit, .ml-form-embedWrapper .row-form, form').forEach(function (el) {
+        el.style.setProperty('margin', '0', 'important');
+        el.style.setProperty('padding', '0', 'important');
+        el.style.setProperty('gap', '0', 'important');
+      });
+      embed.querySelectorAll('.ml-form-embedSubmit').forEach(function (el) {
+        el.style.setProperty('margin-top', '0.4rem', 'important');
+      });
       embed.querySelectorAll('input[type="email"]').forEach(function (el) {
         el.style.setProperty('background', '#fff', 'important');
         el.style.setProperty('border', '1px solid var(--sand-deep)', 'important');
-        el.style.setProperty('border-radius', '14px', 'important');
+        el.style.setProperty('border-radius', '10px', 'important');
         el.style.setProperty('box-shadow', 'none', 'important');
         el.style.setProperty('font-family', '"Baloo 2", system-ui, sans-serif', 'important');
         el.style.setProperty('font-size', '1rem', 'important');
@@ -150,24 +178,49 @@ const formCode = game.ipadLinkForm.code;
         el.style.setProperty('box-sizing', 'border-box', 'important');
       });
       embed.querySelectorAll('button[type="submit"]').forEach(function (el) {
-        el.style.setProperty('background', 'var(--copper)', 'important');
-        el.style.setProperty('color', 'var(--paper)', 'important');
-        el.style.setProperty('font-family', '"Baloo 2", system-ui, sans-serif', 'important');
-        el.style.setProperty('font-size', '0.95rem', 'important');
-        el.style.setProperty('font-weight', '600', 'important');
-        el.style.setProperty('border', 'none', 'important');
-        el.style.setProperty('border-radius', '999px', 'important');
-        el.style.setProperty('padding', '0.75rem 1.1rem', 'important');
-        el.style.setProperty('width', '100%', 'important');
-        el.style.setProperty('cursor', 'pointer', 'important');
-        el.style.setProperty('margin-top', '0.75rem', 'important');
+        var label = (el.textContent || '').trim();
+        if (/email (it to me|me the link)/i.test(label) && label !== 'Email me the link') {
+          el.textContent = 'Email me the link';
+        }
+        el.classList.add('get-app-email-submit');
+
+        function paintRest() {
+          el.style.setProperty('background', '#F6EFE3', 'important');
+          el.style.setProperty('background-color', '#F6EFE3', 'important');
+          el.style.setProperty('color', '#B26A43', 'important');
+          el.style.setProperty('border', '0', 'important');
+          el.style.setProperty('border-radius', '999px', 'important');
+          el.style.setProperty('box-shadow', 'none', 'important');
+          el.style.setProperty('min-height', '2.75rem', 'important');
+          el.style.setProperty('width', '100%', 'important');
+          el.style.setProperty('margin', '0', 'important');
+          el.style.setProperty('margin-top', '0', 'important');
+        }
+        function paintHover() {
+          el.style.setProperty('background', '#B26A43', 'important');
+          el.style.setProperty('background-color', '#B26A43', 'important');
+          el.style.setProperty('color', '#F6EFE3', 'important');
+        }
+        paintRest();
+        if (el.dataset.getAppHoverBound === '1') return;
+        el.dataset.getAppHoverBound = '1';
+        el.addEventListener('mouseenter', paintHover);
+        el.addEventListener('focus', paintHover);
+        el.addEventListener('mouseleave', paintRest);
+        el.addEventListener('blur', paintRest);
       });
     }
 
     function refreshForm() {
-      styleIpadForm();
-      placeNotify();
-      syncNotify();
+      if (!embed || embed.dataset.getAppStyling === '1') return;
+      embed.dataset.getAppStyling = '1';
+      try {
+        styleIpadForm();
+        placeNotify();
+        syncNotify();
+      } finally {
+        embed.dataset.getAppStyling = '0';
+      }
     }
 
     function isVisible(el) {
@@ -308,11 +361,23 @@ const formCode = game.ipadLinkForm.code;
     }, true);
 
     if (embed) {
-      var observer = new MutationObserver(refreshForm);
+      var formTimer = 0;
+      var observer = new MutationObserver(function () {
+        if (embed.dataset.getAppStyling === '1') return;
+        window.clearTimeout(formTimer);
+        formTimer = window.setTimeout(refreshForm, 50);
+      });
       observer.observe(embed, { childList: true, subtree: true });
     }
     refreshForm();
     window.addEventListener('load', refreshForm);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
   })();
 </script>
 
@@ -326,7 +391,6 @@ const formCode = game.ipadLinkForm.code;
     inset: 0;
     z-index: 80;
     display: flex;
-    /* Lift the sheet: bottom-anchored but inset, not flush to the edge */
     align-items: flex-end;
     justify-content: center;
     padding: 1rem 0.85rem calc(1.1rem + env(safe-area-inset-bottom));
@@ -342,7 +406,6 @@ const formCode = game.ipadLinkForm.code;
     position: relative;
     width: 100%;
     max-width: 26rem;
-    /* Leave headroom above so the sheet reads upward, not clipped */
     max-height: min(78dvh, 36rem);
     overflow: auto;
     overscroll-behavior: contain;
@@ -400,34 +463,14 @@ const formCode = game.ipadLinkForm.code;
   }
 
   .get-app-sheet__lead {
-    margin: 0 0 1rem;
+    margin: 0 0 1.1rem;
     color: var(--ink-soft);
     font-size: 0.95rem;
     line-height: 1.4;
   }
 
-  .get-app-row + .get-app-row {
-    margin-top: 0.95rem;
-    padding-top: 0.95rem;
-    border-top: 1px solid var(--rule);
-  }
-
-  .get-app-row--steam,
-  .get-app-row--appstore {
-    display: none;
-  }
-
-  :global(html[data-device="android"]) .get-app-row--steam,
-  :global(html[data-device="desktop"]) .get-app-row--steam,
-  :global(html[data-device="desktop"]) .get-app-row--appstore {
-    display: block;
-  }
-
   .get-app-send {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
   }
 
   .get-app-share,
@@ -461,17 +504,84 @@ const formCode = game.ipadLinkForm.code;
     color: var(--paper);
   }
 
-  .get-app-or {
-    margin: 1.35rem 0 0.45rem;
-    font-size: 0.92rem;
-    color: var(--ink-soft);
+  .get-app-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.05rem 0;
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+  }
+
+  .get-app-divider::before,
+  .get-app-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .get-app-email {
+    width: 100%;
+  }
+
+  :global(#get-app-email-form .ml-form-formContent),
+  :global(#get-app-email-form .ml-form-fieldRow),
+  :global(#get-app-email-form .ml-form-embedSubmit),
+  :global(#get-app-email-form .ml-form-embedWrapper),
+  :global(#get-app-email-form .ml-form-embedBody),
+  :global(#get-app-email-form form) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  :global(#get-app-email-form .ml-form-embedSubmit) {
+    margin-top: 0.4rem !important;
+  }
+
+  /* Secondary to Share/Copy: cream pill at rest (matches ML), copper fill + paper text on hover */
+  :global(#get-app-email-form button.get-app-email-submit),
+  :global(#get-app-email-form button[type="submit"]) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 2.75rem !important;
+    padding: 0.65rem 1.15rem !important;
+    margin: 0 !important;
+    background: var(--paper) !important;
+    background-color: var(--paper) !important;
+    color: var(--copper) !important;
+    font-family: var(--sans) !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: background 160ms var(--ease), background-color 160ms var(--ease), color 160ms var(--ease);
+  }
+
+  :global(#get-app-email-form button.get-app-email-submit:hover),
+  :global(#get-app-email-form button.get-app-email-submit:focus-visible),
+  :global(#get-app-email-form button[type="submit"]:hover),
+  :global(#get-app-email-form button[type="submit"]:focus-visible) {
+    background: var(--copper) !important;
+    background-color: var(--copper) !important;
+    color: var(--paper) !important;
   }
 
   .get-app-notify {
-    display: none;
+    display: none !important;
     align-items: flex-start;
     gap: 0.55rem;
-    margin: 0.7rem 0 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0.45rem 0 0;
     font-size: 0.92rem;
     line-height: 1.35;
     color: var(--ink);
@@ -480,7 +590,11 @@ const formCode = game.ipadLinkForm.code;
 
   :global(html[data-device="iphone"]) .get-app-notify.is-placed,
   :global(html[data-device="android"]) .get-app-notify.is-placed {
-    display: flex;
+    display: flex !important;
+  }
+
+  .get-app-notify[hidden] {
+    display: none !important;
   }
 
   .get-app-notify input {
@@ -494,6 +608,8 @@ const formCode = game.ipadLinkForm.code;
   .get-app-notify__iphone,
   .get-app-notify__android {
     display: none;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   :global(html[data-device="iphone"]) .get-app-notify__iphone,
@@ -501,33 +617,57 @@ const formCode = game.ipadLinkForm.code;
     display: inline;
   }
 
-  .get-app-steam {
+  .get-app-footer {
+    margin-top: 1.15rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .get-app-footer__prompt {
+    margin: 0 0 0.45rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .get-app-footer__links {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    text-decoration: none;
+    gap: 0.35rem 1rem;
   }
 
-  .get-app-steam img {
-    display: block;
-    width: min(100%, 11.5rem);
-    height: auto;
+  .get-app-steam {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
-  .get-app-steam:hover img,
-  .get-app-steam:focus-visible img {
-    opacity: 0.9;
+  .get-app-steam:hover,
+  .get-app-steam:focus-visible {
+    color: var(--ink);
   }
 
-  .get-app-row--appstore {
-    margin: 0;
-    text-align: center;
+  .get-app-steam__icon {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    opacity: 0.85;
   }
 
   .get-app-appstore {
-    font-size: 0.85rem;
+    display: none;
+    font-size: 0.88rem;
     color: var(--ink-soft);
+  }
+
+  :global(html[data-device="desktop"]) .get-app-appstore {
+    display: inline;
   }
 
   :global(body.get-app-lock) {
