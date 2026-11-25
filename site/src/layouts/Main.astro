@@ -49,16 +49,27 @@ const sameAsLinks = [game.appStoreUrl, game.steamUrl, game.socialLinks?.itch, ga
     "name": game.name,
     "description": game.longDescription,
     "url": game.website,
-    "gamePlatform": game.platform,
-    "operatingSystem": "iPadOS",
+    "gamePlatform": ["iPad", "iPhone"],
+    "operatingSystem": "iPadOS, iOS",
     "applicationCategory": "HealthApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "4.99",
-      "priceCurrency": "EUR",
-      "availability": isPreLaunch ? "https://schema.org/PreOrder" : "https://schema.org/InStock",
-      "url": game.appStoreUrl
-    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free download (first 2 Practices)",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": isPreLaunch ? "https://schema.org/PreOrder" : "https://schema.org/InStock",
+        "url": game.appStoreUrl
+      },
+      {
+        "@type": "Offer",
+        "name": "Full Path of Initiation unlock (one-time in-app purchase)",
+        "price": "4.99",
+        "priceCurrency": "EUR",
+        "availability": isPreLaunch ? "https://schema.org/PreOrder" : "https://schema.org/InStock",
+        "url": game.appStoreUrl
+      }
+    ],
     "author": {
       "@type": "Organization",
       "name": game.developer,

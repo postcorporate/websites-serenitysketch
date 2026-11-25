@@ -10,7 +10,10 @@ import { getPublishedPosts } from '../lib/blog';
 const latestPosts = (await getPublishedPosts()).slice(0, 3);
 ---
 
-<Main>
+<Main
+  title="Serenity Sketch: A Mindful Painting App"
+  description="Paint with water on stone and watch it fade. Guided, playful mindfulness for your hands, no drawing skills needed. Free to try."
+>
   <script slot="head" is:inline>
     (function () {
       var ua = navigator.userAgent || '';
@@ -148,7 +151,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       <div class="container hero-copy">
         <p class="eyebrow">&nbsp;</p>
         <h1 class="hero-logo">
-          <span class="visually-hidden">{game.name} — {game.tagline}</span>
+          <span class="visually-hidden">{game.name}: a mindful painting app</span>
           <img
             src="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-medium-640x302.webp"
             srcset="/assets/images/logos/logo-variants-serenity-sketch/grey_transparent/logo-grey_transparent-small-320x151.webp 320w,
