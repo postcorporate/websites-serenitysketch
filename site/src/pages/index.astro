@@ -74,10 +74,34 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
       },
       {
         "@type": "Question",
-        "name": "Do I need to be able to draw?",
+        "name": "I can't draw. Is this for me?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not at all! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Many early players arrive feeling \"I'm not an artist\", and leave feeling otherwise."
+          "text": "Yes, it's made for you! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Many early players arrive feeling \"I'm not an artist\", and leave feeling otherwise. More on that in Liberate to Create."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it like a Buddha Board?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A little, yes! You paint with water and watch it fade, just like on a Buddha Board. On top of that, a gentle Guide walks you through each Practice: copy a mysterious Glyph, paint along to echoing music, or fill a blank canvas. Each session closes with a few quiet questions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can it help me let go of perfectionism?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "That's the heart of it. Every stroke evaporates within moments, so there is no undo, no save, and nothing to fix. You paint, it fades, you paint again. Spending time with something you can't keep is a gentle way to stop judging every line. More in Why I made Serenity Sketch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this art therapy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, and we want to be honest about that. Art therapy happens with a trained therapist. Serenity Sketch is a calm creative practice: a quiet thing to do with your hands, with a gentle Guide and no right or wrong result. The Science Museum of Virginia explains the difference well. If you need support, please reach out to a professional."
         }
       },
       {
@@ -86,6 +110,14 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "We designed Serenity Sketch to be approachable and intuitive. No gaming experience required!"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Something to do instead of scrolling at night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, and we know, it's still a screen! But there is no feed here. You paint slow strokes of water on stone and watch them fade, and the session ends with a few quiet questions instead of one more video. A gentler way to close the day than doomscrolling."
         }
       },
       {
@@ -117,7 +149,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
         "name": "When does it launch?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `${game.launch}, on iPad. Get it on the App Store \u2014 download now and start playing. Sign up above to stay updated on new content and releases.`
+          "text": `${game.launch}, on iPad. Get it on the App Store and start playing. Sign up above to stay updated on new content and releases.`
         }
       }
     ]
@@ -165,7 +197,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
         </h1>
         <p class="tagline">{game.tagline}</p>
 
-        <p class="platform-note">Available now on {game.platform}</p>
+        <p class="platform-note">A mindful painting app. Available now on {game.platform}.</p>
 
         <!-- Feature chips — replaces the lead paragraph from presskit -->
         <ul class="hero-chips">
@@ -213,7 +245,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
           <div class="prose">
             <p class="lede"><strong>A self-care ritual where each evaporating brushstroke brings freedom and reflection. Inspired by Zen principles of impermanence and dishu, the Chinese practice of water calligraphy, you trace water on stone, watch it disappear, and release the need for permanence.</strong></p>
             <p>
-              Most self-care apps are serious and <em>in your head</em>. Serenity Sketch is tactile and <em>in your body</em>. You're walked through each Practice by <strong>the Guide</strong>.
+              Most self-care apps are serious and <em>in your head</em>. Serenity Sketch is tactile and <em>in your body</em>. You're walked through each Practice by <strong>the Guide</strong>. It's a calm way to quiet your mind and loosen the grip of perfectionism, one fading stroke at a time.
             </p>
           </div>
         </div>
@@ -477,13 +509,33 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
           </div>
 
           <div class="faq-item">
-            <dt>Do I need to be able to draw?</dt>
-            <dd>Not at all! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Many early players arrive feeling "I'm not an artist", and leave feeling otherwise.</dd>
+            <dt>I can't draw. Is this for me?</dt>
+            <dd>Yes, it's made for you! The whole experience is built around embracing imperfection, and a beginner's mindset. Your painting evaporates after all, so what is there to judge? Many early players arrive feeling "I'm not an artist", and leave feeling otherwise. More on that in <a href="/blog/liberate-to-create/">Liberate to Create</a>.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Is it like a Buddha Board?</dt>
+            <dd>A little, yes! You paint with water and watch it fade, just like on a Buddha Board. On top of that, a gentle Guide walks you through each Practice: copy a mysterious Glyph, paint along to echoing music, or fill a blank canvas. Each session closes with a few quiet questions.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Can it help me let go of perfectionism?</dt>
+            <dd>That's the heart of it. Every stroke evaporates within moments, so there is no undo, no save, and nothing to fix. You paint, it fades, you paint again. Spending time with something you can't keep is a gentle way to stop judging every line. More in <a href="/blog/why-i-made-this/">Why I made Serenity Sketch</a>.</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Is this art therapy?</dt>
+            <dd>No, and we want to be honest about that. Art therapy happens with a trained therapist. Serenity Sketch is a calm creative practice: a quiet thing to do with your hands, with a gentle Guide and no right or wrong result. <a href="https://smv.org/learn/blog/art-therapy-vs-art-therapeutic-approach/" target="_blank" rel="noopener noreferrer">The Science Museum of Virginia explains the difference well</a>. If you need support, please reach out to a professional.</dd>
           </div>
 
           <div class="faq-item">
             <dt>What if I've never played a video game?</dt>
             <dd>We designed Serenity Sketch to be approachable and intuitive. No gaming experience required!</dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>Something to do instead of scrolling at night?</dt>
+            <dd>Yes, and we know, it's still a screen! But there is no feed here. You paint slow strokes of water on stone and watch them fade, and the session ends with a few quiet questions instead of one more video. A gentler way to close the day than doomscrolling.</dd>
           </div>
 
           <div class="faq-item">
@@ -503,7 +555,7 @@ const latestPosts = (await getPublishedPosts()).slice(0, 3);
 
           <div class="faq-item">
             <dt>When does it launch?</dt>
-            <dd>{game.launch}, on iPad. <a href={game.appStoreUrl} target="_blank" rel="noreferrer">Get it on the App Store</a> — download now and start playing. Sign up above to stay updated on new content and releases.</dd>
+            <dd>{game.launch}, on iPad. <a href={game.appStoreUrl} target="_blank" rel="noreferrer">Get it on the App Store</a> and start playing. Sign up above to stay updated on new content and releases.</dd>
           </div>
 
         </dl>
